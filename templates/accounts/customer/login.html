@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="{% static './css/login.css' %}">
+    <title>ورود</title>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="{% static './images/logo.png' %}" class="logo-img" id="logo-image">
+        </div>
+        <h1>ورود با شماره موبایل</h1>
+        <form method="post">
+            <div class="input-group">
+
+
+                {{ form.phone }}
+                 {% if form.phone.errors %}
+                    <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <ul class="list-none m-0 p-0">
+                            {% for error in form.phone.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {{ form.phone.label_tag }}
+
+
+            </div>
+            <a href="../otp/index.html">
+            <button type="submit">دریافت کد تایید</button>
+            </a>
+        </form>
+    </div>
+    <script src="{% static 'js/verfiy.js' %}"></script>
+</body>
+</html>

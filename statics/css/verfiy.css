@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'Vazir';
+    src: url('./fonts/IRANSansWeb\(2\).woff2') format('woff2'),
+        url('./fonts/IRANSansWeb.woff') format('woff'),
+        url('./fonts/IRANSansWeb.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+     * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: 'Vazir', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+          background-color: #fff;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+      }
+
+      .otp-container {
+          background-color:#fff
+          border-radius: 15px;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+          width: 100%;
+          max-width: 400px;
+          padding: 40px 30px;
+          text-align: center;
+          animation: fadeIn 0.5s ease-in-out;
+      }
+
+      .logo-container {
+          width: 100%;
+          margin-bottom: 20px;
+          display: flex;
+          justify-content: center;
+      }
+
+      .logo-img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          object-fit: contain;
+          border: 1px solid #764ba2;
+      }
+
+      h1 {
+          color: #333;
+          margin-bottom: 10px;
+          font-size: 22px;
+      }
+
+      .description {
+          color: #666;
+          margin-bottom: 30px;
+          font-size: 14px;
+      }
+
+      .otp-inputs {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 30px;
+          direction: ltr;
+      }
+
+      .otp-input {
+          width: 22%;
+          height: 60px;
+          text-align: center;
+          font-size: 24px;
+          border: 2px solid #ddd;
+          border-radius: 10px;
+          transition: all 0.3s;
+      }
+
+      .otp-input:focus {
+          border-color: #764ba2;
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+      }
+
+      button {
+          background: linear-gradient(to right, #667eea, #764ba2);
+          color: white;
+          border: none;
+          padding: 15px;
+          width: 100%;
+          border-radius: 50px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: all 0.3s;
+          font-weight: bold;
+          margin-bottom: 20px;
+      }
+
+      button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .resend-code {
+          margin-top: 15px;
+          font-size: 14px;
+          color: #666;
+      }
+
+      .resend-code a {
+          color: #764ba2;
+          text-decoration: none;
+          font-weight: bold;
+      }
+
+      .resend-code .timer {
+          color: #ff4757;
+          font-weight: bold;
+      }
+
+      @keyframes fadeIn {
+          from {
+              opacity: 0;
+              transform: translateY(20px);
+          }
+
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      /* حالت موبایل برای تمام دستگاه‌ها */
+      @media (min-width: 768px) {
+          .otp-container {
+              width: 90%;
+              max-width: 400px;
+          }
+      }

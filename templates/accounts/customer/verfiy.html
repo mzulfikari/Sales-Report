@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+      <link rel="stylesheet" href="{% static './css/verfiy.css' %}">
+    <title> اعتبار سنجی </title>
+  </head>
+  <body>
+    <div class="otp-container">
+      <div class="logo-container">
+        <img src="{% static './images/logo.png' %}" alt="" class="logo-img" />
+      </div>
+      <h1>تایید شماره موبایل</h1>
+      <p class="description">
+        کد چهار رقمی ارسال شده به شماره
+        <span id="mobile-number">0912****345</span> را وارد کنید
+      </p>
+
+      <form method="post" class="otp-form">
+        {% csrf_token %}
+        <div class="otp-inputs">
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="[0-9]"
+            inputmode="numeric"
+            required
+          />
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="[0-9]"
+            inputmode="numeric"
+            required
+          />
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="[0-9]"
+            inputmode="numeric"
+            required
+          />
+          <input
+            type="text"
+            class="otp-input"
+            maxlength="1"
+            pattern="[0-9]"
+            inputmode="numeric"
+            required
+          />
+        </div>
+        {{ form.code }}
+
+        {% if form.code.errors %}
+           <div class="text-danger">{{ form.code.errors }}</div>
+        {% endif %}
+
+        <button type="submit">تایید و ادامه</button>
+
+        <div class="resend-code">
+          <span>کد را دریافت نکردید؟</span>
+          <a href="#" id="resend-link">ارسال مجدد کد</a>
+          <span id="timer" class="timer"></span>
+        </div>
+      </form>
+    </div>
+
+    <script src="{% static './js/verfiy.js' %}"></script>
+  </body>
+</html>
