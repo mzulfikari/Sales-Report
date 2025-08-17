@@ -6,6 +6,8 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from .models import User
 
+admin.site.site_header = 'پنل مدیریت '
+
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required

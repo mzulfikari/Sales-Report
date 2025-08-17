@@ -49,23 +49,17 @@ class Services(models.Model):
     amount_total = models.DecimalField(
         max_digits=10,decimal_places=0,verbose_name=_('قیمت کل')
     )
+    plaque = models.CharField(
+        
+    ) 
+    image = models.ImageField(
+        null=True,blank=True,verbose_name=_('تصویر پلاک')
+    )
+    
     created_at = models.DateTimeField(
         auto_now_add=True,verbose_name=_('تاریخ خدمت')
         )
     
-    
-    def clean(self):
-     """
-    Validation of latitude and longitude fields
-     """
-    
-     if self.latitude is not None and (self.latitude < -90 or self.latitude > 90):
-      raise ValidationError({'latitude': _('عرض جغرافیایی باید بین -90 تا 90 باشد.')})
-        
-       
-     if self.longitude is not None and (self.longitude < -180 or self.longitude > 180):
-        raise ValidationError({'longitude': _('طول جغرافیایی باید بین -180 تا 180 باشد.')})
-        
     def show_image(self):  
      if self.image:
        return format_html(f'<img src="{self.image.url}" width="78 px" height="50" />')
@@ -73,8 +67,6 @@ class Services(models.Model):
     show_image.short_description = " تصاویر"
 
 
-    
-    
     class Meta:
         verbose_name= _('خدمت')
         verbose_name_plural = _('خدمات')

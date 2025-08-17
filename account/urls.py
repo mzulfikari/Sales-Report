@@ -4,6 +4,6 @@ from .import views
 app_name="account"
 
 urlpatterns = [
-   path('login/customer',views.CutomerLogin.as_view(),name='Login-user'),
-   path('verify/customer',views.UserRegister.as_view(), name='Verify'),
+   path('customer/verfiy',views.CutomerVerfiy.as_view(),name='cutomerverfiy'),
+   path('verify/code',views.CutomeVerfiyCode.as_view(), name='verifycode'),
 ]

@@ -27,6 +27,7 @@ class UserManager(BaseUserManager):
 
         user = self.model(
             phone=phone,
+            **extra_fields
         )
 
         user.set_password(password)
@@ -70,6 +71,12 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_admin = models.BooleanField(
         default=False,verbose_name=_(' وضعیت دسترسی کامل ادمین')
         )
+    is_staff = models.BooleanField(
+        default=False
+        )
+    is_verified = models.BooleanField(
+        default=False, verbose_name=_("تأیید شده")
+        )
     cerated_at = models.DateTimeField(
         auto_now_add=True,verbose_name=_('تاریخ ثبت')
     )
@@ -79,30 +86,13 @@ class User(AbstractBaseUser,PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "phone"
+    REQUIRED_FIELDS = ['frist_name','last_name']
     
     
     def __str__(self):
         return  f"{self.frist_name} {self.last_name}"
 
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
-        return True
-
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
-        return True
-
-    @property
-    def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
-        return self.is_admin
- 
- 
-     
-        
+   
 class Otp(models.Model):
     """
     Authentication related model
