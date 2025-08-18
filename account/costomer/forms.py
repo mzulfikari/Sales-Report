@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from Services.models import Services
-from .models import Otp
+from ..models import Otp
 
 class CustomerVerfiy(forms.ModelForm):
     

@@ -5,5 +5,5 @@ app_name="account"
 
 urlpatterns = [
    path('customer/verfiy',views.CutomerVerfiy.as_view(),name='cutomerverfiy'),
-   path('verify/code',views.CutomeVerfiyCode.as_view(), name='verifycode'),
+   path('verify/code',views.CutomerVerfiyCode.as_view(), name='verifycode'),
 ]

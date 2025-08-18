@@ -111,11 +111,14 @@ class Otp(models.Model):
         verbose_name='کد یکبار مصرف'
         )
     code_expiry = models.DateTimeField(
-        verbose_name='تاریخ انقضای کد',default=timezone.now() + timedelta(minutes=2),
+        verbose_name='تاریخ انقضای کد',default=timezone.now() + timedelta(minutes=1),
         )
     
     def is_expired(self):
-        return timezone.now() > self.code_expiry + timezone.timedelta(minutes=2)
+        return timezone.now() > self.code_expiry + timezone.timedelta(minutes=1)
+    
+    def __str__(self):
+        return f"{self.code}"
     
     class  Meta:
         verbose_name = 'رمز یکبار مصرف'

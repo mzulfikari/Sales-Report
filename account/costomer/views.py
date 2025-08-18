@@ -2,11 +2,11 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.views import View
 from django.contrib.auth import authenticate , login, logout
-from .forms import CustomerVerfiy,VerfiyCustomer
+from ..forms import CustomerVerfiy,VerfiyCustomer
 from uuid import uuid4
 from random import randint
 from django.urls import reverse
-from .models import Otp
+from ..models import Otp
 
 
 class CutomerVerfiy(View):

@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from .models import User
+from .models import User,Otp
 
 admin.site.site_header = 'پنل مدیریت '
 
@@ -81,6 +81,10 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ["email"]
     ordering = ["email"]
     filter_horizontal = []
+
+@admin.register(Otp)
+class OTPAdmin(admin.ModelAdmin):
+    list_display = ("phone", "code",)
 
 
 # Now register the new UserAdmin...

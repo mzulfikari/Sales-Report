@@ -16,8 +16,8 @@ class Services(models.Model):
     store =  models.ForeignKey(
      Store,related_name='service',on_delete=models.CASCADE,verbose_name=_('فروشگاه ')
     )
-    phone = models.name = models.CharField(
-        max_length=15,verbose_name=_('شماره تلفن')
+    customer_phone = models.CharField(
+        max_length=15,verbose_name=_('شماره تماس مشتری')
         )
     sold_by = models.ForeignKey(  
         User,related_name='services_sold',on_delete=models.CASCADE,verbose_name=_('کاربر ثبت کننده')
@@ -28,6 +28,9 @@ class Services(models.Model):
     car_model = models.CharField(
         max_length=120,null=True,blank=True,verbose_name=_('مدل ماشین')
         )
+    # color = models.CharField(
+        
+    # )
     current_km = models.FloatField(
         max_length=120,null=True,blank=True,verbose_name=_(' کیلومتر فعلی')
     )
@@ -50,12 +53,14 @@ class Services(models.Model):
         max_digits=10,decimal_places=0,verbose_name=_('قیمت کل')
     )
     plaque = models.CharField(
-        
+      max_length=10, null=True,blank=True,verbose_name=_('شماره پلاک')
     ) 
-    image = models.ImageField(
+    image_plaque = models.ImageField(
         null=True,blank=True,verbose_name=_('تصویر پلاک')
     )
-    
+    image_km =models.ImageField(
+        null=True,blank=True,verbose_name=_('تصویر کیلومتر ')
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,verbose_name=_('تاریخ خدمت')
         )
@@ -92,7 +97,7 @@ class Invoice(models.Model):
     nots = models.TextField(
        null=True,blank=True, verbose_name=_('توضیحات اختیاری')
     )
-    phone = models.ForeignKey(
+    customer_phone = models.ForeignKey(
         'Services',related_name='costumer',on_delete=models.CASCADE,verbose_name=_('شماره تماس مشتری')
         )
     sold_by = models.ForeignKey(
