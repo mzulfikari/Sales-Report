@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'Vazir';
-    src: url('./fonts/IRANSansWeb\(2\).woff2') format('woff2'),
-        url('./fonts/IRANSansWeb.woff') format('woff'),
-        url('./fonts/IRANSansWeb.ttf') format('truetype');
+    font-family: 'IRANSansWeb';
+    src: url("{% static 'fonts/IRANSansWeb.woff2' %}") format('woff2'),
+         url("{% static 'fonts/IRANSansWeb.woff' %}") format('woff'),
+         url("{% static 'fonts/IRANSansWeb.ttf' %}") format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,7 +23,7 @@
       }
 
       .otp-container {
-          background-color:#fff
+          background-color:#fff;
           border-radius: 15px;
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
           width: 100%;
@@ -59,30 +59,6 @@
           margin-bottom: 30px;
           font-size: 14px;
       }
-
-      .otp-inputs {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 30px;
-          direction: ltr;
-      }
-
-      .otp-input {
-          width: 22%;
-          height: 60px;
-          text-align: center;
-          font-size: 24px;
-          border: 2px solid #ddd;
-          border-radius: 10px;
-          transition: all 0.3s;
-      }
-
-      .otp-input:focus {
-          border-color: #764ba2;
-          outline: none;
-          box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
-      }
-
       button {
           background: linear-gradient(to right, #667eea, #764ba2);
           color: white;
@@ -95,6 +71,7 @@
           transition: all 0.3s;
           font-weight: bold;
           margin-bottom: 20px;
+          margin-top: 15px;
       }
 
       button:hover {
@@ -131,7 +108,7 @@
           }
       }
 
-      /* حالت موبایل برای تمام دستگاه‌ها */
+     
       @media (min-width: 768px) {
           .otp-container {
               width: 90%;

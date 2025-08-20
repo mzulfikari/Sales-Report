@@ -17,7 +17,7 @@ class Services(models.Model):
      Store,related_name='service',on_delete=models.CASCADE,verbose_name=_('فروشگاه ')
     )
     customer_phone = models.CharField(
-        max_length=15,verbose_name=_('شماره تماس مشتری')
+        max_length=15,verbose_name=_('شماره تماس مشتری'),null=True,blank=True
         )
     sold_by = models.ForeignKey(  
         User,related_name='services_sold',on_delete=models.CASCADE,verbose_name=_('کاربر ثبت کننده')
@@ -98,7 +98,7 @@ class Invoice(models.Model):
        null=True,blank=True, verbose_name=_('توضیحات اختیاری')
     )
     customer_phone = models.ForeignKey(
-        'Services',related_name='costumer',on_delete=models.CASCADE,verbose_name=_('شماره تماس مشتری')
+        'Services',related_name='costumer',on_delete=models.CASCADE,verbose_name=_('شماره تماس مشتری'),null=True,blank=True
         )
     sold_by = models.ForeignKey(
         User,related_name='invoices_sold',on_delete=models.CASCADE,verbose_name=_('کاربر ثبت کننده')

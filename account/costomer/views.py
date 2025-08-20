@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.views import View
 from django.contrib.auth import authenticate , login, logout
-from ..forms import CustomerVerfiy,VerfiyCustomer
+from .forms import CustomerVerfiy
 from uuid import uuid4
 from random import randint
 from django.urls import reverse
@@ -18,7 +18,7 @@ class CutomerVerfiy(View):
         return render (request,'accounts/customer/login.html',{'form':form})
     
     def post(self,request):
-        phone = request.POST.get('phone')
+        customer_phone = request.POST.get('customer_phone')
         form = CustomerVerfiy(request.POST)
         if form.is_valid():
             valid = form.cleaned_data
@@ -28,40 +28,9 @@ class CutomerVerfiy(View):
             #     'receptor':valid["phone"],'type':'1','template':'randcode','param1':randcode
             # })
             token = str(uuid4())
-            Otp.objects.create(phone=valid['phone'],
-                code=randcode,
-                token=token
-                )
-            print(f"OTP for admin {phone}: {randcode}")
+            Otp.objects.create(phone=valid['customer_phone'],code=randcode,token=token)
+            request.session['customer_phone'] = valid['customer_phone']
+            print(f"OTP for {customer_phone}: {randcode}")
             return redirect(reverse('account:verifycode') + f'?token={token}')
-        return render(request,"accounts/customer/verfiy.html",{'form':form,'phone': phone})
+        return render(request,"accounts/customer/verfiy.html",{'form':form})
 
-
-                
-class CutomerVerfiyCode(View):
-    """
-    To authenticate the entered number and expire
-    the one-time code within 2 minutes
-    """
-    def get(self, request):
-        form = VerfiyCustomer()
-        return render(request, 'accounts/customer/verfiy.html',
-            {'form': form })
-
-    def post(self,request):
-        token = request.GET.get('token')
-        form = VerfiyCustomer(request.POST)
-        
-        if form.is_valid():
-            valid = form.cleaned_data
-            if Otp.objects.filter(code=valid['code'],token=token,).exists():
-             otp = Otp.objects.get(token=token)
-             if otp.is_expired:
-                    form.add_error('code', "کد منقضی شده است")
-                    return render(request, 'accounts/customer/verfiy.html', {'form': form})
-             return redirect('/')
-            otp.delete()
-        else:
-            form.add_error(None, "اطلاعات وارد شده صحیح نمی باشد ")
-
-        return render(request,'accounts/customer/verfiy.html',{'form':form })
