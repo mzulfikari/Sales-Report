@@ -18,7 +18,7 @@ class VerfiyCode(View):
         'form': form ,
         'customer_phone': customer_phone
         }
-        return render(request, 'accounts/customer/verfiy.html',context)
+        return render(request, 'accounts/verfiy.html',context)
 
     def post(self,request):
         customer_phone = request.session.get('customer_phone')
@@ -35,10 +35,10 @@ class VerfiyCode(View):
              otp = Otp.objects.get(token=token)
              if otp.is_expired:
                     form.add_error('code', "کد منقضی شده است")
-                    return render(request, 'accounts/customer/verfiy.html', {'form': form})
+                    return render(request, 'accounts/verfiy.html', {'form': form})
              return redirect('/')
             otp.delete()
         else:
             form.add_error(None, "اطلاعات وارد شده صحیح نمی باشد ")
            
-        return render(request,'accounts/customer/verfiy.html',context)
+        return render(request,'accounts/verfiy.html',context)

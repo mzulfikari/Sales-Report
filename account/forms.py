@@ -10,8 +10,12 @@ class Verfiy(forms.ModelForm):
         model = Otp
         fields = ['code']
     
-    code = forms.ChoiceField(
-       widget=forms.HiddenInput()
+    code = forms.CharField(
+        label="کد تایید",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control w-50',
+            'style': 'width:350px; height:30px;',
+        })
     )
     
     def clean_code(self):

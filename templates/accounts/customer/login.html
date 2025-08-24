@@ -1,41 +1,85 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="{% static './css/login.css' %}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>ورود</title>
+    {% comment %}
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" /> {% endcomment %}
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/plugins.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/authentication/form-2.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms/theme-checkbox-radio.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms/switches.css' %}">
 </head>
-<body>
-    <div class="login-container">
-        <div class="logo-container">
-            <img src="{% static './images/34d2660f-bb45-4559-9f90-4e1a038cd191.jfif' %}" class="logo-img" id="logo-image">
-        </div>
-        <h1>ورود با شماره موبایل</h1>
-        <form method="post">
-             {% csrf_token %}
-            <div class="input-group">
+<body class="form">
+    <div class="form-container outer">
+        <div class="form-form">
+            <div class="form-form-wrap">
+                <div class="form-container">
+                    <div class="form-content">
+                        <h1 class="">ورود</h1>
+                        <p class="">برای مشاهده جزئیات سرویس خودرو شماره موبایل خود را وارد کنید</p>
 
-                {{ form.customer_phone}}
-                 {% if form.customer_phone.errors %}
-                    <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                        <ul class="list-none m-0 p-0">
-                            {% for error in form.customer_phone.errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
+                        <form class="text-riht" method="post" id="login-form">
+                            {% csrf_token %}
+                            <span class="input-group-text">
+                                <div class="form">
+                                    <div id="username-field" class="field-wrapper input">
+
+                                        <label for="{{ form.phone_customer.id_for_label }}"
+                                            style="font-size:18px; font-weight:bold;">
+                                            {{ form.phone_customer.label }}
+                                        </label>
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                            </span>
+                            {{ form.phone_customer }}
+                            {% if form.phone_customer.errors %}
+                            <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                <i class="bi bi-exclamation-circle-fill"></i>
+                                <ul class="list-none m-0 p-0">
+                                    {% for error in form.phone_customer.errors %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+
                     </div>
-                {% endif %}
-                {{ form.customer_phone.label_tag }}
-
-
+                    <div class="d-flex justify-content-between my-2 my-md-4">
+                        <div class="field-wrapper">
+                            <button type="submit" class="btn btn-primary" value="">ارسال کد</button>
+                        </div>
+                    </div>
+                    <div class="division">
+                    </div>
+                    </form>
+                </div>
             </div>
-            <button type="submit" <a href="{% url 'account:verifycode' %}">دریافت کد تایید</button>
-        </form>
+        </div>
     </div>
-    {% comment %} <script src="{% static './js/login.js' %}"></script> {% endcomment %}
+    </div>
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'js/libs/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'js/authentication/form-2.js' %}"></script>
+
 </body>
+
 </html>

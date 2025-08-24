@@ -18,7 +18,7 @@ class CutomerVerfiy(View):
         return render (request,'accounts/customer/login.html',{'form':form})
     
     def post(self,request):
-        customer_phone = request.POST.get('customer_phone')
+        phone_customer = request.POST.get('phone_customer')
         form = CustomerVerfiy(request.POST)
         if form.is_valid():
             valid = form.cleaned_data
@@ -28,9 +28,9 @@ class CutomerVerfiy(View):
             #     'receptor':valid["phone"],'type':'1','template':'randcode','param1':randcode
             # })
             token = str(uuid4())
-            Otp.objects.create(phone=valid['customer_phone'],code=randcode,token=token)
-            request.session['customer_phone'] = valid['customer_phone']
-            print(f"OTP for {customer_phone}: {randcode}")
+            Otp.objects.create(phone=valid['phone_customer'],code=randcode,token=token)
+            request.session['phone_customer'] = valid['phone_customer']
+            print(f"OTP for {phone_customer}: {randcode}")
             return redirect(reverse('account:verifycode') + f'?token={token}')
         return render(request,"accounts/customer/verfiy.html",{'form':form})
 

@@ -1,22 +1,17 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from Services.models import Services
 
-class CustomerVerfiy(forms.ModelForm):
+
+class CustomerVerfiy(forms.Form):
     
-    class Meta:
-        model = Services        
-        fields = ('customer_phone',)
-        labels = {'customer_phone': 'شماره موبایل',}
-        
-        widgets = {
-        'customer_phone': forms.TextInput(
-        attrs={'class':
-        "input-group",
-        'type':'tel',
-        'id': 'mobile',
-        })}
-        
+    phone_customer = forms.CharField(
+        label="شماره موبایل",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control w-50',
+            'style': 'width:350px; height:30px;',
+        })
+    )
+   
     def clean_phone(self):
          customer_phone= self.cleaned_data.get('customer_phone')
          if not customer_phone.startswith('09'):

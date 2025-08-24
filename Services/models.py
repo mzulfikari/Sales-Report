@@ -74,7 +74,7 @@ class Services(models.Model):
 
     class Meta:
         verbose_name= _('خدمت')
-        verbose_name_plural = _('خدمات')
+        verbose_name_plural = _('سرویس ها')
         ordering = ['-created_at']
         
         

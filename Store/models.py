@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from account.models import User
-
+from django.utils.html import format_html
 
 class Store (models.Model):
     """
@@ -38,7 +38,14 @@ class Store (models.Model):
         null=True,blank=True,verbose_name=_('تصویر فروشگاه')
     )
     
-    
+    def show_image(self):
+        """To display images in the management panel"""
+        if self.image:
+            return format_html(f'<img src="{self.image.url}" width="78 px" height="50" />')
+        return format_html('<h3 style="color: red">تصویر ندارد</h3>')
+    show_image.short_description = " تصاویر"
+
+ 
     class Mets:
         verbose_name= _('فروشگاه')
         verbose_name_plural = _('فروشگاه‌ها')
@@ -63,9 +70,6 @@ class Category (models.Model):
         verbose_name= _('دسته بندی ')
         verbose_name_plural = _('دسته بندی ها')
         ordering = ['-created_at']
-    
-
-    
     
 class Product(models.Model):
     """
@@ -96,9 +100,15 @@ class Product(models.Model):
         upload_to='media/Store/Product',verbose_name=_('تصویر'),null=True,blank=True
     )
     
+    
+    
+    
+    
     class Meta:
         verbose_name= _('محصول')
         verbose_name_plural = _('محصولات')
         ordering = ['-created_at']
+        
+        
     
 
