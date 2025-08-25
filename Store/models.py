@@ -46,9 +46,9 @@ class Store (models.Model):
     show_image.short_description = " تصاویر"
 
  
-    class Mets:
+    class Meta:
         verbose_name= _('فروشگاه')
-        verbose_name_plural = _('فروشگاه‌ها')
+        verbose_name_plural = _('فروشگاه ها')
         ordering = ['-created_at']
     
 
@@ -78,7 +78,7 @@ class Product(models.Model):
     title = models.CharField(
         max_length=80,verbose_name=_('عنوان محصول')
         )
-    Category = models.ForeignKey(
+    category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='product',verbose_name=_('دسته بندی')
     )
     store = models.ForeignKey(
@@ -100,10 +100,15 @@ class Product(models.Model):
         upload_to='media/Store/Product',verbose_name=_('تصویر'),null=True,blank=True
     )
     
-    
-    
-    
-    
+    def show_image(self):
+        """To display images in the management panel"""
+
+        if self.image:
+            return format_html(f'<img src="{self.image.url}" width="78 px" height="50" />')
+        return format_html('<h3 style="color: red">تصویر ندارد</h3>')
+    show_image.short_description = " تصاویر"
+
+
     class Meta:
         verbose_name= _('محصول')
         verbose_name_plural = _('محصولات')

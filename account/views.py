@@ -13,20 +13,20 @@ class VerfiyCode(View):
     """
     def get(self, request):
         form = Verfiy()
-        customer_phone = request.session.get('customer_phone')
+        phone_customer = request.session.get('phone_customer') 
         context= {
         'form': form ,
-        'customer_phone': customer_phone
+        'phone_customer': phone_customer
         }
         return render(request, 'accounts/verfiy.html',context)
 
     def post(self,request):
-        customer_phone = request.session.get('customer_phone')
+        phone_customer = request.session.get('phone_customer')
         token = request.GET.get('token')
         form = Verfiy(request.POST)
         context= {
             'form': form ,
-            'customer_phone': customer_phone
+            'phone_customer': phone_customer
         }
         
         if form.is_valid():

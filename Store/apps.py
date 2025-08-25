@@ -4,4 +4,4 @@ from django.apps import AppConfig
 class StoreConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'Store'
-    verbose_name = 'فروشگاه ها'
+    verbose_name = 'مدیریت فروشگاه ها' 

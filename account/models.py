@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser,PermissionsMixin
+from django.dispatch import receiver
 from django.utils.translation import gettext as _
 from django.core.validators import RegexValidator
 from datetime import timedelta
 from django.utils import timezone
-
+from django.db.models.signals import post_save
 
 class UserType(models.IntegerChoices):
     """
@@ -12,10 +13,8 @@ class UserType(models.IntegerChoices):
     """
     superuser = 1, _("superuser")
     admin = 2, _("admin")
-    Limited_admin = 3,_("Limited_admin")
+    limited_admin = 3,_("limited_admin")
     
-
-
 class UserManager(BaseUserManager):
     
     def create_user(self, phone,password,**extra_fields):
@@ -50,48 +49,81 @@ class UserManager(BaseUserManager):
             raise ValueError(_("Superuser must have is_superuser=True."))
         return self.create_user(phone, password, **extra_fields)
 
-
 class User(AbstractBaseUser,PermissionsMixin):
     
-    frist_name = models.CharField(
-        max_length=30,verbose_name=_('نام')
-    )
-    last_name = models.CharField(
-        max_length=30,verbose_name=_('نام خانوداگی')
-        )
-    email = models.EmailField(
-        max_length=255,verbose_name=_('آدرس ایمیل ادمین')
-    )
     phone = models.CharField(
-        unique=True,max_length=15,verbose_name=_('شماره تلفن ادمین')
-        )
-    is_active = models.BooleanField(
-        default=True,verbose_name=_('وضعیت فعالیت')
-    )
-    is_admin = models.BooleanField(
-        default=False,verbose_name=_(' وضعیت دسترسی کامل ادمین')
+        unique=True,verbose_name=_('شماره تلفن'),max_length=15
         )
     is_staff = models.BooleanField(
         default=False
-        )
+    )
+    is_active = models.BooleanField(
+        default=True
+    )
     is_verified = models.BooleanField(
-        default=False, verbose_name=_("تأیید شده")
-        )
-    cerated_at = models.DateTimeField(
-        auto_now_add=True,verbose_name=_('تاریخ ثبت')
+        default=False
     )
     type = models.IntegerField(
-        choices=UserType.choices, default=UserType.admin.value)
+        choices=UserType.choices,default=UserType.admin.value,verbose_name= _('نقش کاربر')
+    )
+    created_dete = models.DateTimeField(
+        auto_now_add=True,verbose_name=_('تاریخ ایجاد ')
+    )
+    update_date = models.DateTimeField(
+      verbose_name= _(' تاریخ بروز رسانی'),auto_now=True
+    )
+    
+    USERNAME_FIELD = "phone"
+    REQUIRED_FIELDS = []
     
     objects = UserManager()
-
-    USERNAME_FIELD = "phone"
-    REQUIRED_FIELDS = ['frist_name','last_name']
+    
+    class Meta:
+        verbose_name = 'کاربر'
+        verbose_name_plural = 'مدیریت کاربران '
     
     
     def __str__(self):
-        return  f"{self.frist_name} {self.last_name}"
+        return self.phone
 
+
+class Profile (models.Model):
+    user = models.OneToOneField(
+        'User',on_delete=models.CASCADE,related_name='user_profile'
+        )
+    first_name = models.CharField(
+        max_length=50, verbose_name= _('نام ')
+        )
+    last_name = models.CharField(
+        max_length=50, verbose_name= _(' نام خانوداگی ')
+        )
+    email = models.EmailField(
+        verbose_name=_('ایمیل'),null=True,blank=True
+        )
+    image = models.ImageField(
+        upload_to="profile",null=True, blank=True,verbose_name= _('تصویر پروفایل')
+    )
+    created_dete = models.DateTimeField(
+        auto_now_add=True,verbose_name=_('تاریخ ایجاد '),
+    )
+    update_date = models.DateTimeField(
+        auto_now=True,verbose_name= _(' تاریخ بروز رسانی')
+    )
+    
+    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    class Meta:
+        verbose_name = 'پروفایل'
+        verbose_name_plural = 'مدیریت پروفایل ها '
+    
+@receiver(post_save,sender=User)
+def cerated_profile(sender,instance,created,**kwargs):
+    if created and  instance.type == UserType.limited_admin.value:
+        Profile.objects.create(user=instance)
+        
+    
    
 class Otp(models.Model):
     """

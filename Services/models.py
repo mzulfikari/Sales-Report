@@ -26,11 +26,11 @@ class Services(models.Model):
         max_length=120,null=True,blank=True,verbose_name=_('خودرو ')
         )
     car_model = models.CharField(
-        max_length=120,null=True,blank=True,verbose_name=_('مدل ماشین')
+        max_length=120,null=True,blank=True,verbose_name=_('مدل خودرو ')
         )
-    # color = models.CharField(
-        
-    # )
+    color = models.CharField(
+        max_length=40,null=True,blank=True,verbose_name=_('رنگ خودرو')
+    )
     current_km = models.FloatField(
         max_length=120,null=True,blank=True,verbose_name=_(' کیلومتر فعلی')
     )

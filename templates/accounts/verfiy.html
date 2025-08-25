@@ -19,6 +19,22 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/forms/theme-checkbox-radio.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/forms/switches.css' %}">
 </head>
+<style>
+    #timer {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .card {
+        border-radius: 12px;
+    }
+
+    .btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+</style>
+
 <body class="form">
     <div class="form-container outer">
         <div class="form-form">
@@ -61,17 +77,30 @@
                     </div>
                     <div class="d-flex justify-content-between my-2 my-md-4">
                         <div class="field-wrapper">
-                            <button type="submit" class="btn btn-primary" value="">ارسال کد</button>
+                            <button type="submit" class="btn btn-primary" value="">ورود به پنل کاربری</button>
                         </div>
                     </div>
                     <div class="division">
                     </div>
                     </form>
-                </div>
-            </div>
-        </div>
+                    <!-- Resend form-->
+                    <form method="post" action="" class="text-center mt-3" id="resendForm" style="display: none;">
+                        {% csrf_token %}
+                        <button type="submit" id="resendBtn" class="btn btn-primary">
+                            ارسال مجدد کد
+                        </button>
+                    </form>
+
+                    <!-- timer -->
+                    <p id="timer" class="text-center mt-2 text-muted"></p>
+                 </div>
+             </div>
+         </div>
+       </div>
     </div>
-    </div>
+   </div>
+ </div>
+</div>
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{% static 'js/libs/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -79,6 +108,28 @@
 
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <script src="{% static 'js/authentication/form-2.js' %}"></script>
+    <script>
+        let timeLeft = 120; 
+        const timerElement = document.getElementById("timer");
+        const resendForm = document.getElementById("resendForm");
+
+        function startTimer() {
+            const countdown = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timerElement.textContent = "می‌توانید دوباره کد دریافت کنید";
+                    resendForm.style.display = "block";
+                } else {
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    timerElement.textContent =
+                        `ارسال مجدد بعد از ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+        window.onload = startTimer;
+    </script>
 
 </body>
 

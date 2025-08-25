@@ -1,94 +1,100 @@
-from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from django.core.exceptions import ValidationError
 from .models import User,Otp
-
-admin.site.site_header = 'پنل مدیریت '
-
-
-class UserCreationForm(forms.ModelForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
-
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label="Password confirmation", widget=forms.PasswordInput
-    )
-
-    class Meta:
-        model = User
-        fields = ["email",]
-
-    def clean_password2(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise ValidationError("Passwords don't match")
-        return password2
-
-    def save(self, commit=True):
-        # Save the provided password in hashed format
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
-            user.save()
-        return user
+from .forms import Verfiy
 
 
-class UserChangeForm(forms.ModelForm):
-    """A form for updating users. Includes all the fields on
-    the user, but replaces the password field with admin's
-    disabled password hash display field.
+admin.site.site_header = 'پنل مدیریت سرویس خودرو'
+
+
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from.models import Profile
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class CustomUserAdmin(UserAdmin):
     """
-
-    password = ReadOnlyPasswordHashField()
-
-    class Meta:
-        model = User
-        fields = ["email", "password","is_active", "is_admin"]
-
-
-class UserAdmin(BaseUserAdmin):
-    # The forms to add and change user instances
-    form = UserChangeForm
-    add_form = UserCreationForm
-
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
-    list_display = ["phone","is_admin"]
-    list_filter = ["is_admin"]
-    fieldsets = [
-        (None, {"fields": ["email", "password"]}),
-        
-        ("Permissions", {"fields": ["is_admin"]}),
-    ]
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
-    add_fieldsets = [
+    Custom admin panel for user management with add and change forms plus password
+    """
+    model = User
+    list_display = ("id","phone_display","is_superuser","is_active","is_verified")
+    list_filter = ("phone", "is_superuser",)
+    ordering = ("phone",)
+    
+    fieldsets = (
+        (
+            "Authentication",
+            {
+                "fields": ("phone", "password"),
+            },
+        ),
+        (
+            "permissions",
+            {
+                "fields": (
+                    "is_staff",
+                    "is_active",
+                    "is_superuser",
+                    "is_verified",
+                ),
+            },
+        ),
+        (
+            "group permissions",
+            {
+                "fields": ("groups", "user_permissions","type"),
+            },
+        ),
+        (
+            "important date",
+            {
+                "fields": ("last_login",),
+            },
+        ),
+    )
+    add_fieldsets = (
         (
             None,
             {
-                "classes": ["wide"],
-                "fields": ["email", "date_of_birth", "password1", "password2"],
+                "classes": ("wide",),
+                "fields": (
+                    "phone",
+                    "password1",
+                    "password2",
+                    "is_staff",
+                    "is_active",
+                    "is_superuser",
+                    "is_verified",
+                    "type"
+                ),
             },
         ),
-    ]
-    search_fields = ["email"]
-    ordering = ["email"]
-    filter_horizontal = []
+    )
+    
+    def phone_display(self, obj):
+     return obj.phone or "—"
+    phone_display.short_description = "شماره تلفن"
+    phone_display.admin_order_field = "phone"
+
+class CustomProfileAdmin(admin.ModelAdmin):
+    list_display = ("id","user", "first_name","last_name","get_phone")
+    searching_fields = ("user","first_name","last_name",)
+    
+    @admin.display(description='شماره تلفن')
+    def get_phone(self, obj):
+        return obj.user.phone
+    
+admin.site.register(Profile,CustomProfileAdmin)
+admin.site.register(User, CustomUserAdmin)
+# Now register the new UserAdmin...
+# ... and, since we're not using Django's built-in permissions,
+# unregister the Group model from admin.
+admin.site.unregister(Group)
 
 @admin.register(Otp)
 class OTPAdmin(admin.ModelAdmin):
     list_display = ("phone", "code",)
 
-
-# Now register the new UserAdmin...
-admin.site.register(User, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-admin.site.unregister(Group)
