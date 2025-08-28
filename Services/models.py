@@ -27,16 +27,16 @@ class Services(models.Model):
         )
     car_model = models.CharField(
         max_length=120,null=True,blank=True,verbose_name=_('مدل خودرو ')
-        )
+    )
     color = models.CharField(
         max_length=40,null=True,blank=True,verbose_name=_('رنگ خودرو')
-    )
+        )
     current_km = models.FloatField(
         max_length=120,null=True,blank=True,verbose_name=_(' کیلومتر فعلی')
     )
-    next_km= models.FloatField(
-       null=True, blank=True, verbose_name=_('تاریخ نوبت بعدی')
-    )
+    next_km= models.CharField(
+      max_length=120,null=True, blank=True, verbose_name=_('تاریخ نوبت بعدی')
+        )
     product = models.ManyToManyField(
         Product,related_name='service',verbose_name=_('محصولات')
     )
@@ -54,16 +54,16 @@ class Services(models.Model):
     )
     plaque = models.CharField(
       max_length=10, null=True,blank=True,verbose_name=_('شماره پلاک')
-    ) 
+        ) 
     image_plaque = models.ImageField(
         null=True,blank=True,verbose_name=_('تصویر پلاک')
     )
     image_km =models.ImageField(
         null=True,blank=True,verbose_name=_('تصویر کیلومتر ')
-    )
+        )
     created_at = models.DateTimeField(
         auto_now_add=True,verbose_name=_('تاریخ خدمت')
-        )
+    )
     
     def show_image(self):  
      if self.image:

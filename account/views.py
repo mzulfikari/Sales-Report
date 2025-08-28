@@ -4,7 +4,7 @@ from django.views import View
 from django.contrib.auth import authenticate , login, logout
 from .forms import Verfiy
 from .models import Otp
-
+from django.contrib.auth import views as auth_views
                 
 class VerfiyCode(View):
     """
@@ -34,11 +34,17 @@ class VerfiyCode(View):
             if Otp.objects.filter(code=valid['code'],token=token,).exists():
              otp = Otp.objects.get(token=token)
              if otp.is_expired:
-                    form.add_error('code', "کد منقضی شده است")
-                    return render(request, 'accounts/verfiy.html', {'form': form})
+                form.add_error('code', "کد منقضی شده است")
+                return render(request, 'accounts/verfiy.html', {'form': form})
              return redirect('/')
             otp.delete()
         else:
             form.add_error(None, "اطلاعات وارد شده صحیح نمی باشد ")
            
         return render(request,'accounts/verfiy.html',context)
+
+
+
+class LogOutView(auth_views.LogoutView):
+    """Exit the user and redirect to the main page """
+    pass

@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'Services.apps.ServicesConfig',
     'account.apps.AccountConfig',
     'Store.apps.StoreConfig',
+    'Dashbord.apps.DashbordConfig',
       
 
 ]
@@ -71,8 +72,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
 
 # DATABASES = {
 #     'default': {
@@ -147,3 +146,4 @@ JALALI_DATE_DEFAULTS = {
 }
 
 AUTH_USER_MODEL = "account.User"
+LOGOUT_REDIRECT_URL = '/'

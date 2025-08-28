@@ -110,6 +110,10 @@ class Profile (models.Model):
         auto_now=True,verbose_name= _(' تاریخ بروز رسانی')
     )
     
+    def get_fullname(self):
+        if self.first_name or self.last_name:
+            return self.first_name + " " + self.last_name
+        return "کاربر جدید"
     
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

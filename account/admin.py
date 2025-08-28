@@ -87,14 +87,11 @@ class CustomProfileAdmin(admin.ModelAdmin):
     def get_phone(self, obj):
         return obj.user.phone
     
-admin.site.register(Profile,CustomProfileAdmin)
-admin.site.register(User, CustomUserAdmin)
-# Now register the new UserAdmin...
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-admin.site.unregister(Group)
 
 @admin.register(Otp)
 class OTPAdmin(admin.ModelAdmin):
     list_display = ("phone", "code",)
 
+admin.site.register(Profile,CustomProfileAdmin)
+admin.site.register(User, CustomUserAdmin)
+admin.site.unregister(Group)
