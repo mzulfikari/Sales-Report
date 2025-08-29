@@ -1,9 +1,18 @@
-from django.urls import path
+from django.urls import path,include
 from . import views
 
-app_name = "dashbord"
+app_name = "Dashbord"
 
 urlpatterns = [  
-    path('',views.IndexViews.as_view(),name="Index"),
+    path('dashbord',views.DashbordViews.as_view(),name="dashbord"),
+    
+    #include manager urls
+    path("manager/",include('Dashbord.manager.urls')),
+    
+    # #include admin_limit urls
+    # path("admin_limit/",include('Dashbord.admin_limit.urls')),
+    
+    # #include costumer urls
+    # path("costumer/",include('Dashbord.costumer.urls')),
 
 ]

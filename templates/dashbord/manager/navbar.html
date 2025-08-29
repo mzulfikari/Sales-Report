@@ -17,10 +17,13 @@
   <link href="{% static 'css/plugins.css' %}" rel="stylesheet" type="text/css" />
   <!-- END GLOBAL MANDATORY STYLES -->
 
-  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
   <link href="{% static 'plugins/apex/apexcharts.css' %}" rel="stylesheet" type="text/css" />
   <link href="{% static 'css/dashboard/dash_1.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'css/perfect-scrollbar.css' %}" rel="stylesheet" />
+  <link href="{% static 'plugins/highlight/styles/monokai-sublime.css' %}" rel="stylesheet" />
   <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+   
   {% block extra_css %} {% endblock extra_css %}
 
   {% block extra_css_no_css %} {% endblock extra_css_no_css %}

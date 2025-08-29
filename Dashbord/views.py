@@ -12,12 +12,12 @@ class DashbordViews(LoginRequiredMixin,View):
     
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.type == UserType.admin.value:
-                redirect(reverse_lazy('#'))
+            if request.user.type == UserType.superuser.value:
+                redirect(reverse_lazy('Dashboard:manager:dashbordviews'))
             elif request.user.type == UserType.limited_admin.value:
                 redirect(reverse_lazy('#')) 
         else:
-            redirect(reverse_lazy('account:'))
+            redirect(reverse_lazy('account:cutomerverfiy'))
         return super().dispatch(request, *args, **kwargs)
         
     
