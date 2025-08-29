@@ -15,6 +15,7 @@ class UserType(models.IntegerChoices):
     admin = 2, _("admin")
     limited_admin = 3,_("limited_admin")
     
+    
 class UserManager(BaseUserManager):
     
     def create_user(self, phone,password,**extra_fields):
