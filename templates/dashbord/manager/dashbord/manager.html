@@ -1,0 +1,128 @@
+{% extends "dashbord/manager/base.html" %}
+{% block title %} مدیریت {% endblock title %}
+{% load static %}
+{% block content %}
+<!-- BEGIN PAGE CONTENT -->
+<div id="page-content">
+    <div id="inner-content">
+        <div class="row">
+            <!-- BEGIN BREADCRUMB -->
+            <div class="col-md-12">
+                <div class="breadcrumb-box shadow">
+                    <ul class="breadcrumb">
+                        <li><a href="dashboard.html">میز خدمت</a></li>
+                    </ul>
+                    <div class="breadcrumb-left">
+                        یکشنبه، 1404/02/28
+                        <i class="icon-calendar"></i>
+                    </div><!-- /.breadcrumb-left -->
+                </div><!-- /.breadcrumb-box -->
+            </div><!-- /.col-md-12 -->
+            <!-- END BREADCRUMB -->
+
+            <div class="col-md-12">
+                <div class="row">
+                    
+                    <div class="col-lg-3 col-6">
+                        <div class="stat-box use-blue shadow">
+                            <a href="#">
+                                <div class="stat">
+                                    <div class="counter-up">2048</div>
+                                    <div class="h3">سرویس امروز</div>
+                                </div><!-- /.stat -->
+                                <div class="visual">
+                                    <i class="icon-calculator"></i>
+                                </div><!-- /.visual -->
+                            </a>
+                        </div><!-- /.stat-box -->
+                    </div><!-- /.col-lg-3 -->
+                  
+                    <div class="col-lg-3 col-6">
+                        <div class="stat-box use-lime shadow">
+                            <a href="#">
+                                <div class="stat">
+                                    <div class="counter-up">512</div>
+                                    <div class="h3">جمع فاکتور های امروز</div>
+                                </div><!-- /.stat -->
+                                <div class="visual">
+                                    <i class="icon-wallet"></i>
+                                </div><!-- /.visual -->
+                            </a>
+                        </div><!-- /.stat-box -->
+                    </div><!-- /.col-lg-3 -->
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="col-xl-6 col-12">
+                        <div class="portlet box shadow">
+                            <div class="portlet-heading">
+                                <div class="portlet-title">
+                                    <h3 class="title">
+                                        <i class="icon-speech"></i>
+                                        آخرین سرویس ها
+                                    </h3>
+                                </div><!-- /.portlet-title -->
+                                <div class="buttons-box">
+
+                                </div><!-- /.buttons-box -->
+                            </div><!-- /.portlet-heading -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="icon-energy"></i></th>
+                                            <th>نام</th>
+                                            <th>نام خانوادگی</th>
+                                            <th>نام کاربری</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>حمید</td>
+                                            <td>آفرینش فر</td>
+                                            <td>hamid.afarinesh</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>محمد</td>
+                                            <td>دلاوری</td>
+                                            <td>mohammad.delavari</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>ایمان</td>
+                                            <td>صالحی</td>
+                                            <td>iman.salehi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>مهدی</td>
+                                            <td>حسینی</td>
+                                            <td>mahdi.hoseini</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.table-responsive -->
+                            <a href="#" class="btn btn-success btn-block">
+                                <i class="icon-list fa-flip-horizontal"></i>
+                                مشاهده فهرست کامل تراکنش ها
+                            </a>
+                        </div><!-- /.portlet-body -->
+                    </div><!-- /.portlet -->
+                </div><!-- /.col-xl-6 -->
+
+            </div><!-- /.input-group -->
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+</div><!-- /.col-xl-6 -->
+</div><!-- /.row -->
+</div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+</div><!-- /#inner-content -->
+</div><!-- /#page-content -->
+<!-- END PAGE CONTENT -->
+
+</div><!-- /#wrapper -->
+
+{% endblock content %}

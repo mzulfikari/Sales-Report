@@ -5,4 +5,4 @@ from django.views.generic import TemplateView
 
 class AdminDashbordViews(TemplateView):
     
-    template_name = 'dashbord/manager/manager.html'
+    template_name = 'dashbord/manager/dashbord/manager.html'
