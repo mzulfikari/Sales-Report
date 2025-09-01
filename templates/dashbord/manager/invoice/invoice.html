@@ -1,0 +1,122 @@
+{% extends "dashbord/manager/base.html" %}
+{% block title %} گزارش فاکتور {% endblock title %}
+{% load static %}
+{% block content %}
+<!-- BEGIN PAGE CONTENT -->
+<div id="page-content">
+    <div id="inner-content">
+        <div class="row">
+            <!-- BEGIN BREADCRUMB -->
+            <div class="col-md-12">
+                <div class="breadcrumb-box shadow">
+                    <ul class="breadcrumb">
+                        <li><a href="dashboard.html">پیشخوان</a></li>
+                        <li><a href="#">جدول ها</a></li>
+                        <li class="active">خروجی از Data Table</li>
+                    </ul>
+                    <div class="breadcrumb-left">
+                        یکشنبه، 1404/02/28
+                        <i class="icon-calendar"></i>
+                    </div><!-- /.breadcrumb-left -->
+                </div><!-- /.breadcrumb-box -->
+            </div><!-- /.col-md-12 -->
+            <!-- END BREADCRUMB -->
+
+            <div class="col-lg-12">
+                <div class="portlet box shadow">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <h3 class="title">
+                                <i class="icon-frane"></i>
+                                گزارش فاکتور ها
+                            </h3>
+
+                            </button> <button class="dt-button buttons-pdf buttons-html5 btn btn-success" tabindex="0"
+                                aria-controls="data-table" type="button"><span>فایل PDF</span>
+                                <div class="paper-ripple">
+                                    <div class="paper-ripple__background" style="opacity: 0.004;"></div>
+                                    <div class="paper-ripple__waves"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </div><!-- /.top-buttons-box -->
+                    <div id="data-table_filter" class="dataTables_filter"><label>جستجو:<input type="search" class=""
+                                placeholder="" aria-controls="data-table"></label></div>
+                                
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>ماده غذایی</th>
+                                    <th>مقدار</th>
+                                    <th>کالری</th>
+                                    <td>عملیات</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>مغز فندق</td>
+                                    <td>100گرم</td>
+                                    <td>630</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info">مشاهده</a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>آب سیب</td>
+                                    <td>یک لیوان</td>
+                                    <td>90</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info">مشاهده</a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>آب نارنج</td>
+                                    <td>یک قاشق</td>
+                                    <td>4</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info">مشاهده</a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>آبغوره</td>
+                                    <td>100گرم</td>
+                                    <td>20</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info">مشاهده</a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>آجیل</td>
+                                    <td>یک لیوان</td>
+                                    <td>750</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info">مشاهده</a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- /.table-responsive -->
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+        </div><!-- /.col-lg-12 -->
+    </div><!-- /.row -->
+</div><!-- /#inner-content -->
+</div><!-- /#page-content -->
+<!-- END PAGE CONTENT -->
+
+</div><!-- /#wrapper -->
+<!-- END WRAPPER -->
+{% endblock %}

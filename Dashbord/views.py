@@ -24,3 +24,4 @@ class DashbordViews(LoginRequiredMixin,View):
 class ProfileShopViews(TemplateView):
     
     template_name = 'dashbord/manager/profile_shop.html'
+    

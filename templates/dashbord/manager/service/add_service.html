@@ -1,85 +1,189 @@
-{% include "dashbord/manager/navbar.html" %}
+{% extends "dashbord/manager/base.html" %}
 {% block title %}سروریس جدید{% endblock title %}
+{% load static %}
+{% block content %}
 
-<form class="needs-validation" novalidate action="javascript:void(0);">
-    <div class="form-row">
-        <div class="col-md-4 mb-4">
-            <label for="validationCustom01">نام کوچک</label>
-            <input type="text" class="form-control" id="validationCustom01" placeholder="نام کوچک" value="ستون" required>
-            <div class="valid-feedback">
-                به نظر خوب میاد!
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <label for="validationCustom02">نام فامیلی</label>
-            <input type="text" class="form-control" id="validationCustom02" placeholder="نام فامیلی" value="شاپ" required>
-            <div class="valid-feedback">
-                به نظر خوب میاد!
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <label for="validationCustomUsername">Username</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                </div>
-                <input type="text" class="form-control" id="validationCustomUsername" placeholder="نام کاربری" aria-describedby="inputGroupPrepend" required>
-                <div class="invalid-feedback">
-                    لطفاً یک نام کاربری انتخاب کنید
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="col-md-6 mb-4">
-            <label for="validationCustom03">City</label>
-            <input type="text" class="form-control" id="validationCustom03" placeholder="شهر" required>
-            <div class="invalid-feedback">
-                لطفاً یک شهر معتبر تهیه کنید.
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <label for="validationCustom04">State</label>
-            <input type="text" class="form-control" id="validationCustom04" placeholder="دولت" required>
-            <div class="invalid-feedback">
-                لطفاً یک کشور معتبر ارائه دهید.
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <label for="validationCustom05">Zip</label>
-            <input type="text" class="form-control" id="validationCustom05" placeholder="کد پستی" required>
-            <div class="invalid-feedback">
-                لطفاً یک کدپستی معتبر وارد کنید.
-            </div>
-        </div>
-    </div>
-    <div class="form-group mb-4">
-        <div class="form-check pl-0">
-            <div class="custom-control custom-checkbox checkbox-success">
-                <input type="checkbox" class="custom-control-input" id="invalidCheck" required>
-                <label class="custom-control-label" for="invalidCheck">با شرایط و قوانین موافق باشید</label>
-                <div class="invalid-feedback">
-                    قبل از ارسال باید موافقت کنید
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="btn btn-primary mt-3" type="submit">ارسال فرم</button>
-</form>
+<!-- BEGIN PAGE CONTENT -->
+<div id="page-content">
+    <div id="inner-content">
+        <div class="row">
+            <!-- BEGIN BREADCRUMB -->
+            <div class="col-md-12">
+                <div class="breadcrumb-box shadow">
+                    <ul class="breadcrumb">
+                        <li><a href="dashboard.html">پیشخوان</a></li>
+                        <li><a href="#">فرم ها</a></li>
+                        <li class="active">فرم ها</li>
+                    </ul>
+                    <div class="breadcrumb-left">
+                        یکشنبه، 1404/02/28
+                        <i class="icon-calendar"></i>
+                    </div><!-- /.breadcrumb-left -->
+                </div><!-- /.breadcrumb-box -->
+            </div><!-- /.col-md-12 -->
+            <!-- END BREADCRUMB -->
 
-{% block extra_js %} 
-<script>
-window.addEventListener('load', function() {
-    var forms = document.getElementsByClassName('needs-validation');
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-}, false);
-</script>
-{% endblock extra_js %}
+            <div class="col-lg-6">
+                <div class="portlet box shadow">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <h3 class="title">
+                                <i class="icon-settings"></i>
+                                ثبت سرویس جدید
+                            </h3>
+                        </div><!-- /.portlet-title -->
+
+                    </div><!-- /.portlet-heading -->
+                    <div class="portlet-body">
+                        <form role="form">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <div class="form-group round">
+                                        <label>شماره تلفن</label>
+                                        <input type="text" class="form-control text-right ltr numeric">
+                                    </div><!-- /.form-group -->
+                                    <div class="form-group round">
+                                        <label>نام خودرو</label>
+                                        <input type="text" class="form-control">
+                                    </div><!-- /.form-group -->
+                                    <div class="form-group round">
+                                        <label> شماره پلاک</label>
+                                        <input type="text" class="form-control">
+                                    </div><!-- /.form-group -->
+
+                                </div><!-- /.form-group -->
+                                <div class="form-group round">
+                                    <label>مدل خودرو</label>
+                                    <input type="text" class="form-control text-right ltr numeric">
+                                </div><!-- /.form-group -->
+                                <div class="form-group round">
+                                    <label>کیلومتر فعلی</label>
+                                    <input type="text" class="form-control text-right ltr numeric">
+                                </div><!-- /.form-group -->
+                                <div class="form-group round">
+                                    <label>رنگ خودرو</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select">
+                                            <option value="">-- انتخاب کنید --</option>
+                                            <option value="white">سفید</option>
+                                            <option value="black">مشکی</option>
+                                            <option value="silver">نقره‌ای</option>
+                                            <option value="gray">خاکستری (ذغالی)</option>
+                                            <option value="blue">آبی</option>
+                                            <option value="navy">سرمه‌ای</option>
+                                            <option value="red">قرمز</option>
+                                            <option value="green">سبز (یشمی/زیتونی)</option>
+                                            <option value="beige">بژ (طلایی/کرم)</option>
+                                        </select>
+                                    </div>
+                                </div><!-- /.form-group -->
+                                <div class="form-group round">
+                                    <label>روغن</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select">
+                                            <!-- این لیست باید داینامیک از دیتابیس بیاد -->
+                                            <option value="">-- انتخاب کنید --</option>
+                                            <option value="1">روغن موتور بهران 10W40</option>
+                                            <option value="2">روغن موتور کاسترول 20W50</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                 <div class="form-group round">
+                                    <label>فیلتر</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select">
+                                            <!-- این لیست باید داینامیک از دیتابیس بیاد -->
+                                            <option value="">-- انتخاب کنید --</option>
+                                            <option value="1">فیلتر روغن </option>
+                                            <option value="2">فیلتر هوا</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                 <div class="form-group round">
+                                    <label>مایعات مصرفی</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select">
+                                            <!-- این لیست باید داینامیک از دیتابیس بیاد -->
+                                            <option value="">-- انتخاب کنید --</option>
+                                            <option value="1">ضدیخ / ضدجوش</option>
+                                            <option value="2">آب رادیاتور</option>
+                                            <option value="2">مایع شیشه‌شور</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                 <div class="form-group round">
+                                    <label> قطعات مصرفی جانبی</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select">
+                                            <!-- این لیست باید داینامیک از دیتابیس بیاد -->
+                                            <option value="">-- انتخاب کنید --</option>
+                                            <option value="1">واشر کارتل</option>
+                                            <option value="2">آب رادیاتور</option>
+                                            <option value="2">لامپ‌های مصرفی خودرو</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group round">
+                                    <label>یادآوری سرویس بعدی</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select">
+                                            <!-- این لیست باید داینامیک از دیتابیس بیاد -->
+                                            <option value="">-- انتخاب کنید --</option>
+                                            <option value="1">سه ماهه/کم مصرف</option>
+                                            <option value="2">دو ماهه/میان مصرف</option>
+                                            <option value="2">یک ماهه/ پرمصرف</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+
+                                <div class="form-group relative">
+                                    <input type="file" class="form-control">
+                                    <label> تصویر پلاک</label>
+                                    <div class="input-group round">
+                                        <input type="text" class="form-control file-input"
+                                            placeholder="برای آپلود کلیک کنید">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success">
+                                                <i class="icon-picture"></i>
+                                                آپلود عکس
+                                            </button>
+                                        </span>
+                                    </div><!-- /.input-group -->
+                                    <div class="form-group relative">
+                                        <input type="file" class="form-control">
+                                        <label> تصویر کیلومتر</label>
+                                        <div class="input-group round">
+                                            <input type="text" class="form-control file-input"
+                                                placeholder="برای آپلود کلیک کنید">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-success">
+                                                    <i class="icon-picture"></i>
+                                                    آپلود عکس
+                                                </button>
+                                            </span>
+                                        </div><!-- /.input-group -->
+                                        <div class="help-block"></div>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.form-body -->
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-success btn-round">
+                                        <i class="icon-check"></i>
+                                        ثبت سرویس
+                                    </button>
+                                    
+                                </div><!-- /.form-actions -->
+                        </form>
+                    </div><!-- /.portlet-body -->
+                </div><!-- /.portlet -->
+
+                {% endblock %}
