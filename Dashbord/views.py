@@ -21,7 +21,5 @@ class DashbordViews(LoginRequiredMixin,View):
         return super().dispatch(request, *args, **kwargs)
         
     
-class ProfileShopViews(TemplateView):
-    
-    template_name = 'dashbord/manager/profile_shop.html'
+
     

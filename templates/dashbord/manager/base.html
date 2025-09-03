@@ -8,8 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="keywords"
-        content="">
+    <meta name="keywords" content="">
     <meta name="fontiran.com:license" content="NE29X">
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
 
@@ -25,7 +24,6 @@
     <link href="{% static 'plugins/iCheck/skins/square/_all.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/colors.css' %}" rel="stylesheet">
-
 
     {% block extra_css %} {% endblock extra_css %}
 
@@ -45,7 +43,8 @@
     <div class="navbar navbar-fixed-top" id="main-navbar">
         <div class="header-right">
             <a href="dashboard.html" class="logo-con">
-                <img src="{% static 'images/logo/ef79d9ba-3c28-4786-994e-0564d3f19387.jpg' %}" class="img-responsive center-block" alt="">
+                <img src="{% static 'images/logo/ef79d9ba-3c28-4786-994e-0564d3f19387.jpg' %}"
+                    class="img-responsive center-block" alt="">
             </a>
         </div><!-- /.header-right -->
         <div class="header-left">
@@ -73,21 +72,22 @@
                             <i class="icon-size-fullscreen"></i>
                         </a>
                     </li>
-                    
+
                     <li class="dropdown dropdown-user">
                         <a href="#" class="dropdown-toggle dropdown-hover" data-bs-toggle="dropdown">
-                            <img src="{% static 'images/user/48.png' %}" alt="عکس پرفایل" class="img-circle img-responsive">
-                            <span>حمید آفرینش فر</span>
+                            <img src="{{request.user.user_profile.image.url}}" alt="عکس پرفایل" width="60px"
+                                height="55px" style="border-radius: 100%">
+                            <span>{{request.user.user_profile.get_fullname}}</span>
                             <i class="icon-arrow-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="edit_profile.html">
                                     <i class="icon-note"></i>
-                                     پروفایل
+                                    پروفایل
                                 </a>
                             </li>
-                            
+
                             <li class="divider"></li>
                             <li>
                                 <a href="login.html">
@@ -110,14 +110,15 @@
         <div id="sidebar">
             <div class="sidebar-top">
                 <div class="search-box">
-                  
+
                 </div><!-- /.search-box -->
                 <div class="user-box">
                     <a href="#">
-                        <img src="{% static 'images/user/128.png' %}" alt="عکس پروفایل" class="img-circle img-responsive">
+                        <img src="{{request.user.user_profile.image.url}}" alt="عکس پروفایل"
+                            class="img-circle img-responsive">
                     </a>
                     <div class="user-details">
-                        <h4>حمید آفرینش فر</h4>
+                        <h4>{{request.user.user_profile.get_fullname}}</h4>
                         <p class="role">مدیر فنی</p>
                         <div class="dropdown user-login">
                             <button class="btn btn-xs btn-status dropdown-toggle btn-round" type="button"
@@ -158,29 +159,29 @@
             <div class="side-menu-container">
                 <ul class="metismenu" id="side-menu">
                     <li class="open active conditional-bg">
-                        <a href="{% url 'Dashbord:manager:dashbordviews' %}" >
+                        <a href="{% url 'Dashbord:manager:dashbordviews' %}">
                             <i class="icon-home"></i>
                             <span>میز خدمت</span>
                         </a>
-                        
+
                     </li>
                     <li>
-                        <a href="{% url 'Dashbord:manager:service_add' %}" >
+                        <a href="{% url 'Dashbord:manager:informationcar_add' %}">
                             <i class="icon-settings"></i>
                             <span> ثبت سرویس جدید</span>
                         </a>
                     <li>
-                        <a href="#" >
+                        <a href="{% url 'Dashbord:manager:invoice_export' %}">
                             <i class=" far fa-file-lines"></i>
                             <span> گزارش سرویس ها</span>
                         </a>
-                       
+
                     <li>
-                        <a href="#" >
+                        <a href="#">
                             <i class="icon-calculator"></i>
                             <span>گزارش فاکتور ها</span>
                         </a>
-                    
+
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-people"></i>
@@ -220,7 +221,7 @@
                 </div><!-- /.copyright -->
             </div><!-- /.col-md-12 -->
         </div><!-- /.r-->
-             {% block content %}   {% endblock content %}
+        {% block content %} {% endblock content %}
 
         <!-- BEGIN SETTING -->
         <div class="settings d-none d-sm-block">
@@ -278,32 +279,38 @@
                     <ul class="sidebar-bg">
                         <li class="active">
                             <a href="#" href="javascript:void(0)">
-                                <img src="{% static 'images/sidebar-bg/thumb/1.jpg' %}" data-bg="1" alt="sidebar background">
+                                <img src="{% static 'images/sidebar-bg/thumb/1.jpg' %}" data-bg="1"
+                                    alt="sidebar background">
                             </a>
                         </li>
                         <li>
                             <a href="#" href="javascript:void(0)">
-                                <img src="{% static 'images/sidebar-bg/thumb/2.jpg' %}" data-bg="2" alt="sidebar background">
+                                <img src="{% static 'images/sidebar-bg/thumb/2.jpg' %}" data-bg="2"
+                                    alt="sidebar background">
                             </a>
                         </li>
                         <li>
                             <a href="#" href="javascript:void(0)">
-                                <img src="{% static 'images/sidebar-bg/thumb/3.jpg' %}" data-bg="3" alt="sidebar background">
+                                <img src="{% static 'images/sidebar-bg/thumb/3.jpg' %}" data-bg="3"
+                                    alt="sidebar background">
                             </a>
                         </li>
                         <li>
                             <a href="#" href="javascript:void(0)">
-                                <img src="{% static 'images/sidebar-bg/thumb/4.jpg' %}" data-bg="4" alt="sidebar background">
+                                <img src="{% static 'images/sidebar-bg/thumb/4.jpg' %}" data-bg="4"
+                                    alt="sidebar background">
                             </a>
                         </li>
                         <li>
                             <a href="#" href="javascript:void(0)">
-                                <img src="{% static 'images/sidebar-bg/thumb/5.jpg' %}" data-bg="5" alt="sidebar background">
+                                <img src="{% static 'images/sidebar-bg/thumb/5.jpg' %}" data-bg="5"
+                                    alt="sidebar background">
                             </a>
                         </li>
                         <li>
                             <a href="#" href="javascript:void(0)">
-                                <img src="{% static 'images/sidebar-bg/thumb/no-image.png' %}" data-bg="" alt="no image">
+                                <img src="{% static 'images/sidebar-bg/thumb/no-image.png' %}" data-bg=""
+                                    alt="no image">
                             </a>
                         </li>
                     </ul>
@@ -343,7 +350,8 @@
         <script src="{% static 'plugins/bootstrap/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'plugins/metisMenu/dist/metisMenu.min.js' %}"></script>
         <script src="{% static 'plugins/paper-ripple/dist/PaperRipple.min.js' %}"></script>
-        <script src="{% static 'plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+        <script src="{% static 'plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js' %}">
+        </script>
         <script src="{% static 'plugins/sweetalert2/dist/sweetalert2.min.js' %}"></script>
         <script src="{% static 'plugins/screenfull/dist/screenfull.min.js' %}"></script>
         <script src="{% static 'plugins/iCheck/icheck.min.js' %}"></script>

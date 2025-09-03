@@ -11,9 +11,9 @@ class UserType(models.IntegerChoices):
     """
     Define user modes
     """
-    superuser = 1, _("superuser")
-    admin = 2, _("admin")
-    limited_admin = 3,_("limited_admin")
+    superuser = 1, _("مدیر ارشد")
+    admin = 2, _("مدیر فروشگاه ")
+    limited_admin = 3,_("کارمند محدود")
     
     
 class UserManager(BaseUserManager):
