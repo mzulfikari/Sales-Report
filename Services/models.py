@@ -6,12 +6,24 @@ from account.models import User
 from django.utils.html import format_html
 
 
+
 class Services(models.Model):
     """
     Implementation of services with the ability to register a store with limited access to the admin
     Connecting to products and calculating the price of products and services...
     For which customer and registration by which user
     """
+    COLOR_CHOICES = [
+        ('white', 'سفید'),
+        ('black', 'مشکی'),
+        ('silver', 'نقره‌ای'),
+        ('gray', 'خاکستری (ذغالی)'),
+        ('blue', 'سرمه‌ای'),
+        ('navy', 'آبی'),
+        ('red', 'قرمز'),
+        ('green', 'سبز (یشمی/زیتونی)'),
+        ('beige', 'بژ (طلایی/کرم)'),
+    ]
     
     store =  models.ForeignKey(
      Store,related_name='service',on_delete=models.CASCADE,verbose_name=_('فروشگاه ')
@@ -29,7 +41,7 @@ class Services(models.Model):
         max_length=120,null=True,blank=True,verbose_name=_('مدل خودرو ')
     )
     color = models.CharField(
-        max_length=40,null=True,blank=True,verbose_name=_('رنگ خودرو')
+        choices=COLOR_CHOICES,max_length=40,null=True,blank=True,verbose_name=_('رنگ خودرو')
         )
     current_km = models.FloatField(
         max_length=120,null=True,blank=True,verbose_name=_(' کیلومتر فعلی')

@@ -11,10 +11,9 @@ class StoreAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "manager",
-        "image",
         "phone",
         "show_image",
-        "get_created_jalali",)
+        "get_created_at_jalali",)
     
     search_fields=(
         "get_created_jalali",
@@ -23,10 +22,9 @@ class StoreAdmin(admin.ModelAdmin):
     list_filter = (
             "title",
             )
-    @admin.display(description='تاریخ ایجاد', ordering='created_at')
-    def get_created_jalali(self, obj):
-        return datetime2jalali(obj.created_at).strftime('%a, %d %b %Y')
-
+    @admin.display(description='تاریخ ارسال', ordering='created_at')
+    def get_created_at_jalali(self, obj):
+        return datetime2jalali(obj.created_at).strftime('%a, %d %b  %Y _ %H:%M')
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -47,9 +45,9 @@ class ProductAdmin(admin.ModelAdmin):
             "created_at",
             )
     
-    @admin.display(description='تاریخ ایجاد', ordering='created')
+    @admin.display(description='تاریخ ایجاد', ordering='created_at')
     def get_created_jalali(self, obj):
-        return datetime2jalali(obj.created).strftime('%a, %d %b %Y')
+        return datetime2jalali(obj.created_at).strftime('%a, %d %b %Y')
 
 
 @admin.register(Category)

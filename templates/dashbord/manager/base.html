@@ -158,7 +158,8 @@
             </div><!-- /.sidebar-top -->
             <div class="side-menu-container">
                 <ul class="metismenu" id="side-menu">
-                    <li class="open active conditional-bg">
+                    <li class="
+                      open active conditional-bg {% if request.resolver_match.url_name == 'dashbordviews' %} active {% endif %}">
                         <a href="{% url 'Dashbord:manager:dashbordviews' %}">
                             <i class="icon-home"></i>
                             <span>میز خدمت</span>
@@ -340,6 +341,7 @@
                     <div class="modal-body"></div>
                 </div> <!-- /.modal-content -->
             </div> <!-- /.modal-dialog -->
+        </div> 
         </div> <!-- /.modal -->
         <!-- END CODE MODAL -->
 

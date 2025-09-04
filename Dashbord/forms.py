@@ -96,10 +96,6 @@ class InformationCar(forms.ModelForm):
             "form-control text-right ltr numeric",
             'placeholder': 'کارکرد کیلومتر فعلی'
             }),
-            'color': forms.TextInput(
-            attrs={'class':
-            "form-control text-right ltr numeric",
-            })
         }
         
     def clean_phone(self):
@@ -144,9 +140,8 @@ class InformationCar(forms.ModelForm):
      
 
          
-class CarPlaque(forms.ModelForm):
-    plaque = PlateField(label="شماره پلاک")
-
-    class Meta:
-        model =  Services
-        fields = ["plaque"]
+class ServiceAdd(forms.ModelForm):
+    
+     class Meta:
+        model = Services   
+        fields  = ('customer_phone','car','car_model','color','current_km','plaque',)

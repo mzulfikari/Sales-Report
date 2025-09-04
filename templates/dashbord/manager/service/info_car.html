@@ -41,11 +41,32 @@
                                     <div class="form-group round">
                                         {{ form.customer_phone.label }}
                                         {{ form.customer_phone }}
+                                        {% if form.customer_phone.errors %}
+                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                            <ul class="list-none m-0 p-0">
+                                                {% for error in form.customer_phone.errors %}
+                                                <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group round">
                                         {{ form.car.label }}
                                         {{form.car}}
+                                        {% if form.car.errors %}
+                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                            <ul class="list-none m-0 p-0">
+                                                {% for error in form.car.errors %}
+                                                <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="d-flex gap-2 justify-content-right align-items-center">
@@ -54,33 +75,63 @@
                                         {% for widget in form.plaque %}
                                         {{ widget }}
                                         {% endfor %}
+                                        
+                                        {% if form.plaque.errors %}
+                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                            <ul class="list-none m-0 p-0">
+                                                {% for error in form.plaque.errors %}
+                                                <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
                                     </div>
 
                                 </div><!-- /.form-group -->
                                 <div class="form-group round">
                                     {{form.car_model.label}}
                                     {{form.car_model}}
+
+                                      {% if form.car_model.errors %}
+                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                            <ul class="list-none m-0 p-0">
+                                                {% for error in form.car_model.errors %}
+                                                <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+                                    </div>
                                 </div><!-- /.form-group -->
 
                                 <div class="form-group round">
                                     {{form.current_km.label}}
                                     {{form.current_km}}
+                                     {% if form.current_km.errors %}
+                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                            <ul class="list-none m-0 p-0">
+                                                {% for error in form.current_km.errors %}
+                                                <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+                                    </div>
                                 </div><!-- /.form-group -->
 
                                 <div class="form-group round">
-                                    <label>رنگ خودرو</label>
+                                    {{ form.color.label }}
                                     <div class="col-sm-9">
-                                        <select class="form-select">
+                                        <select class="form-select" name="color">
                                             <option value="">-- انتخاب کنید --</option>
-                                            <option value="white">سفید</option>
-                                            <option value="black">مشکی</option>
-                                            <option value="silver">نقره‌ای</option>
-                                            <option value="gray">خاکستری (ذغالی)</option>
-                                            <option value="blue">آبی</option>
-                                            <option value="navy">سرمه‌ای</option>
-                                            <option value="red">قرمز</option>
-                                            <option value="green">سبز (یشمی/زیتونی)</option>
-                                            <option value="beige">بژ (طلایی/کرم)</option>
+                                            {% for value, label in form.fields.color.choices %}
+                                            <option value="{{ value }}"
+                                                {% if form.color.value == value %}selected{% endif %}>{{ label }}
+                                            </option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div><!-- /.form-group -->
@@ -115,12 +166,11 @@
                                     </div><!-- /.form-group -->
                                 </div><!-- /.form-body -->
 
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-success btn-round">
+                                <div class="form-actions text-center">
+                                    <button type="submit" class="btn btn-success btn-round btn-lg">
                                         <i class="icon-check"></i>
                                         ادامه
                                     </button>
-
                                 </div><!-- /.form-actions -->
                         </form>
                     </div><!-- /.portlet-body -->

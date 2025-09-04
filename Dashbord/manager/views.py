@@ -16,7 +16,7 @@ class InformationCarAdd(LoginRequiredMixin,View):
     """
     def get(self, request):
         form = InformationCar()
-        return render (request,'dashbord/manager/service/info_add.html',{'form':form})
+        return render (request,'dashbord/manager/service/info_car.html',{'form':form})
     
     def post(self, request):
         user = request.user
@@ -24,8 +24,6 @@ class InformationCarAdd(LoginRequiredMixin,View):
         if form.is_valid():
             infocar = form.save(commit=False)
             infocar.user = request.user  
-              
-            infocar.save()
             return redirect('Profile:Address') 
         else:      
             return render (request,'dashbord/manager/dashbord/manager.html',{'form':form})
@@ -34,4 +32,8 @@ class InvoiceViews(TemplateView):
     
     template_name = 'dashbord/manager/invoice/invoice.html'
     
+    
+class ServicesAdd(TemplateView):
+    
+    template_name = 'dashbord/manager/service/service_car.html'
     

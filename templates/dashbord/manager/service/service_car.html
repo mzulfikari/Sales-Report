@@ -1,0 +1,140 @@
+{% extends "dashbord/manager/base.html" %}
+{% block title %}سروریس جدید{% endblock title %}
+{% load static %}
+{% block content %}
+
+<!-- BEGIN PAGE CONTENT -->
+<div id="page-content">
+    <div id="inner-content">
+        <div class="row">
+            <!-- BEGIN BREADCRUMB -->
+            <div class="col-md-12">
+                <div class="breadcrumb-box shadow">
+                    <ul class="breadcrumb">
+                        <li><a href="dashboard.html">پیشخوان</a></li>
+                        <li><a href="#">فرم ها</a></li>
+                        <li class="active">فرم ها</li>
+                    </ul>
+                    <div class="breadcrumb-left">
+                        یکشنبه، 1404/02/28
+                        <i class="icon-calendar"></i>
+                    </div><!-- /.breadcrumb-left -->
+                </div><!-- /.breadcrumb-box -->
+            </div><!-- /.col-md-12 -->
+            <!-- END BREADCRUMB -->
+
+            <div class="col-lg-6">
+                <div class="portlet box shadow">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <h3 class="title">
+                                <i class="icon-wrench"></i>
+                                ثبت سرویس
+                            </h3>
+                        </div><!-- /.portlet-title -->
+
+                    </div><!-- /.portlet-heading -->
+                    <div class="portlet-body">
+                        <form role="form">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <div class="form-group round">
+                                        <div class="form-group row ">
+                                            <label class="col-3">
+                                                <div class="mt-1">قیمت روغن   </div>
+                                            </label>
+                                            <div class="col-9">
+                                                <div class="col-9">
+                                                    <input type="text" class="form-control ltr numeric separate"
+                                                        id="amount"
+                                                        class="form-control text-right ltr numeric separate">
+                                                </div>
+                                            </div><!-- .col -->
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group row ">
+                                            <label class="col-3">
+                                                <div class="mt-1"> لنت خودرو</div>
+                                            </label>
+                                            <div class="col-9">
+                                                <div class="col-9">
+                                                    <input type="text" class="form-control ltr numeric separate"
+                                                        id="amount"
+                                                        class="form-control text-right ltr numeric separate">
+                                                </div>
+                                            </div><!-- .col -->
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group row ">
+                                            <label class="col-3">
+                                                <div class="mt-1">مبلغ</div>
+                                            </label>
+                                            <div class="col-9">
+                                                <div class="col-9">
+                                                    <input type="text" class="form-control ltr numeric separate"
+                                                        id="amount"
+                                                        class="form-control text-right ltr numeric separate">
+                                                </div>
+                                            </div><!-- .col -->
+                                        </div><!-- /.form-group -->
+                                        <div class="form-group row ">
+                                            <label class="col-3">
+                                                <div class="mt-1">مبلغ</div>
+                                            </label>
+                                            <div class="col-9">
+                                                <div class="col-9">
+                                                    <input type="text" class="form-control ltr numeric separate"
+                                                        id="amount"
+                                                        class="form-control text-right ltr numeric separate">
+                                                </div>
+                                            </div><!-- .col -->
+                                        </div><!-- /.form-group -->
+
+                                        <div class="form-group row ">
+                                            <label class="col-3">
+                                                <div class="mt-1">مبلغ</div>
+                                            </label>
+                                            <div class="col-9">
+                                                <div class="col-9">
+                                                    <input type="text" class="form-control ltr numeric separate"
+                                                        id="amount"
+                                                        class="form-control text-right ltr numeric separate">
+                                                </div>
+                                            </div><!-- .col -->
+                                        </div><!-- /.form-group -->
+
+                                        <div class="form-group row ">
+                                            <label class="col-3">
+                                                <div class="mt-1">مبلغ</div>
+                                            </label>
+                                            <div class="col-9">
+                                                <div class="col-9">
+                                                    <input type="text" class="form-control ltr numeric separate"
+                                                        id="amount"
+                                                        class="form-control text-right ltr numeric separate">
+                                                </div>
+                                            </div><!-- .col -->
+                                        </div><!-- /.form-group -->
+                                        <div class="help-block"></div>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.form-body -->
+
+                                <div class="form-actions text-center">
+                                    <button type="submit" class="btn btn-success btn-round btn-lg">
+                                        <i class="icon-check"></i>
+                                        ادامه
+                                    </button>
+                                </div><!-- /.form-actions -->
+                        </form>
+                    </div><!-- /.portlet-body -->
+                </div><!-- /.portlet -->
+
+                <!-- Script to separate three price digits-->
+                <script>
+                    document.getElementById('amount').addEventListener('input', function(e) {
+                        let value = e.target.value.replace(/,/g, '');
+                        if (!isNaN(value)) {
+                            e.target.value = Number(value).toLocaleString('en-US');
+                        }
+                    });
+                </script>
+
+                {% endblock %}

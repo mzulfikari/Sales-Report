@@ -44,6 +44,9 @@ class Store (models.Model):
             return format_html(f'<img src="{self.image.url}" width="78 px" height="50" />')
         return format_html('<h3 style="color: red">تصویر ندارد</h3>')
     show_image.short_description = " تصاویر"
+    
+    def __str__(self):
+        return f"{self.title}"
 
  
     class Meta:
@@ -78,8 +81,8 @@ class Product(models.Model):
     title = models.CharField(
         max_length=80,verbose_name=_('عنوان محصول')
         )
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name='product',verbose_name=_('دسته بندی')
+    category = models.ManyToManyField(
+        Category, related_name='product',verbose_name=_('دسته بندی'),blank=True
     )
     store = models.ForeignKey(
         Store,on_delete=models.CASCADE, related_name='store',verbose_name=_('فروشگاه')
@@ -88,7 +91,7 @@ class Product(models.Model):
         max_length=100,verbose_name=_('نام برند محصول '),null=True,blank=True
     )
     price = models.DecimalField(
-       max_digits=10,decimal_places=0,verbose_name=_('قیمت محصول')
+       max_digits=10,decimal_places=0,verbose_name=_('قیمت محصول'),null=True,blank=True
         )
     quantity = models.IntegerField(
         verbose_name=_('تعداد محصول'),null=True,blank=True
@@ -104,7 +107,7 @@ class Product(models.Model):
         """To display images in the management panel"""
 
         if self.image:
-            return format_html(f'<img src="{self.image.url}" width="78 px" height="50" />')
+            return format_html(f'<img src="{self.image.url}" width="40 px" height="60" />')
         return format_html('<h3 style="color: red">تصویر ندارد</h3>')
     show_image.short_description = " تصاویر"
 
