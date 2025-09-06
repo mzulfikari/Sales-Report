@@ -24,6 +24,7 @@
     <link href="{% static 'plugins/iCheck/skins/square/_all.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/colors.css' %}" rel="stylesheet">
+    
 
     {% block extra_css %} {% endblock extra_css %}
 
@@ -32,7 +33,7 @@
 
 </head>
 
-<body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1 dark">
+<body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
     <!-- BEGIN LOEADING -->
     <div id="loader">
         <div class="spinner"></div>
@@ -42,10 +43,10 @@
     <!-- BEGIN HEADER -->
     <div class="navbar navbar-fixed-top" id="main-navbar">
         <div class="header-right">
-            <a href="dashboard.html" class="logo-con">
+            {% comment %} <a href="dashboard.html" class="logo-con">
                 <img src="{% static 'images/logo/ef79d9ba-3c28-4786-994e-0564d3f19387.jpg' %}"
                     class="img-responsive center-block" alt="">
-            </a>
+            </a> {% endcomment %}
         </div><!-- /.header-right -->
         <div class="header-left">
             <div class="top-bar">

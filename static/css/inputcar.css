@@ -1,0 +1,38 @@
+  .form-inline-group {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        direction: rtl;
+    }
+
+    .inline-label {
+        font-weight: bold;
+        white-space: nowrap;
+        margin-bottom: 0;
+    }
+
+    .form-inline-group input {
+        width: 300px;
+        padding: 8px 12px;
+        border-radius: 30px;
+        border: 1px solid #ccc;
+        outline: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+    }
+
+    .form-layout {
+        display: grid;
+        row-gap: 16px;
+    }
+
+    .form-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}

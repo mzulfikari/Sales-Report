@@ -16,16 +16,18 @@ class Plaque(forms.MultiWidget):
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
                        'style': 'width: 60px; letter-spacing: 2px;',
                        }),
-            forms.TextInput(
+             forms.TextInput(
                 attrs={'maxlength': '1',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
                        'style': 'width: 50px; letter-spacing: 2px;',
                        'placeholder': 'الف'}),
+           
             forms.TextInput(
                 attrs={'maxlength': '3',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm', 
                        'style': 'width: 80px; letter-spacing: 2px;',
                        }),
+            
             forms.TextInput(
                 attrs={'maxlength': '2',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
@@ -35,10 +37,9 @@ class Plaque(forms.MultiWidget):
         super().__init__(widgets, attrs)
         
     def decompress(self, value):
-        if value:
-            return value.split("-")
-        return ["", "", "", ""]
-    
+     if value:
+        return value.split("-")
+     return ["", "", "", ""]
     
 class PlateField(forms.MultiValueField):
     """
@@ -54,47 +55,39 @@ class PlateField(forms.MultiValueField):
         super().__init__(fields, widget=Plaque(), *args, **kwargs)
 
     def compress(self, data_list):
-        """
-        """
-        if data_list:
-             return "-".join(data_list)
-
+     if data_list:
+        return "-".join(data_list)
 
 class InformationCar(forms.ModelForm):
     """Vehicle registration form"""
-    plaque = PlateField()
+    plaque = PlateField(label='شماره پلاک')
     class Meta:
         model = Services   
-        fields  = ('customer_phone','car','car_model','color','current_km','plaque',)
+        fields  = ('customer_phone','car','car_model','color','current_km',)
         labels = {
             'customer_phone': 'شماره تلفن',
             'car': 'نام خودرو',
             'car_model': 'مدل خودرو',
             'color': 'رنگ',
             'current_km': 'کیلومتر فعلی',
-            'plaque': 'شماره پلاک',
         }
         
         widgets = {
             'customer_phone': forms.TextInput(
             attrs={'class':
             "form-control text-right ltr numeric",
-            'placeholder': 'شماره تلفن را وارد کنید'
             }),
             'car': forms.TextInput(
             attrs={'class':
             "form-control",
-            'placeholder': ' نام خودرو را وارد کنید'
             }),
             'car_model': forms.TextInput(
             attrs={'class':
             "form-control",
-            'placeholder': 'سال تولید خودرو'
             }),
             'current_km': forms.TextInput(
             attrs={'class':
             "form-control text-right ltr numeric",
-            'placeholder': 'کارکرد کیلومتر فعلی'
             }),
         }
         

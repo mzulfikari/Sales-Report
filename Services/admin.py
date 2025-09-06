@@ -21,7 +21,6 @@ class ProductAdmin(admin.ModelAdmin):
         )
     
     list_filter = (
-            "store",
             "created_at",
             )
     

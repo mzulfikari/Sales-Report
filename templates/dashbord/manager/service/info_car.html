@@ -3,7 +3,10 @@
 {% load static %}
 {% block content %}
 
+<!-- BEGIN CSS -->
+<link href="{% static 'css\inputcar.css' %}" rel="stylesheet">
 <!-- BEGIN PAGE CONTENT -->
+
 <div id="page-content">
     <div id="inner-content">
         <div class="row">
@@ -38,8 +41,12 @@
                         <form role="form">
                             <div class="form-body">
                                 <div class="form-group">
-                                    <div class="form-group round">
-                                        {{ form.customer_phone.label }}
+                                    <div class="form-inline-group">
+                                        <div class="mb-4">
+                                            <label for="{{ form.customer_phone.id_for_label }}" class="inline-label">
+                                                {{ form.customer_phone.label }}
+                                            </label>
+                                        </div>
                                         {{ form.customer_phone }}
                                         {% if form.customer_phone.errors %}
                                         <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
@@ -52,9 +59,14 @@
                                         </div>
                                         {% endif %}
                                     </div>
+
                                     <!-- /.form-group -->
-                                    <div class="form-group round">
-                                        {{ form.car.label }}
+                                    <div class="form-inline-group">
+                                        <div class="mb-4">
+                                            <label for="{{ form.car.id_for_label }}" class="inline-label">
+                                                {{ form.car.label }}
+                                            </label>
+                                        </div>
                                         {{form.car}}
                                         {% if form.car.errors %}
                                         <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
@@ -69,13 +81,19 @@
 
                                     </div>
                                     <!-- /.form-group -->
-                                    <div class="d-flex gap-2 justify-content-right align-items-center">
-                                        <label class="fw-bold">شماره پلاک</label>
+                                    <div class="form-inline-group">
+                                        <div class="mb-4">
+                                            <label for="{{ form.plaque.id_for_label }}" class="inline-label">
+                                                {{ form.plaque.label }}
+                                            </label>
+                                        </div>
 
-                                        {% for widget in form.plaque %}
-                                        {{ widget }}
-                                        {% endfor %}
-                                        
+                                        <div class="d-flex gap-2 align-items-center" style="direction: ltr;">
+                                            {% for widget in form.plaque %}
+                                            {{ widget }}
+                                            {% endfor %}
+                                        </div>
+
                                         {% if form.plaque.errors %}
                                         <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
                                             <i class="bi bi-exclamation-circle-fill"></i>
@@ -89,117 +107,124 @@
                                     </div>
 
                                 </div><!-- /.form-group -->
-                                <div class="form-group round">
-                                    {{form.car_model.label}}
+                                <div class="form-inline-group">
+                                    <div class="mb-4">
+                                        <label for="{{ form.car_model.id_for_label }}" class="inline-label">
+                                            {{ form.car_model.label }}
+                                        </label>
+                                    </div>
+
                                     {{form.car_model}}
-
-                                      {% if form.car_model.errors %}
-                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                            <i class="bi bi-exclamation-circle-fill"></i>
-                                            <ul class="list-none m-0 p-0">
-                                                {% for error in form.car_model.errors %}
-                                                <li>{{ error }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div><!-- /.form-group -->
-
-                                <div class="form-group round">
-                                    {{form.current_km.label}}
-                                    {{form.current_km}}
-                                     {% if form.current_km.errors %}
-                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                            <i class="bi bi-exclamation-circle-fill"></i>
-                                            <ul class="list-none m-0 p-0">
-                                                {% for error in form.current_km.errors %}
-                                                <li>{{ error }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div><!-- /.form-group -->
-
-                                <div class="form-group round">
-                                    {{ form.color.label }}
-                                    <div class="col-sm-9">
-                                        <select class="form-select" name="color">
-                                            <option value="">-- انتخاب کنید --</option>
-                                            {% for value, label in form.fields.color.choices %}
-                                            <option value="{{ value }}"
-                                                {% if form.color.value == value %}selected{% endif %}>{{ label }}
-                                            </option>
+                                    {% if form.car_model.errors %}
+                                    <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                        <i class="bi bi-exclamation-circle-fill"></i>
+                                        <ul class="list-none m-0 p-0">
+                                            {% for error in form.car_model.errors %}
+                                            <li>{{ error }}</li>
                                             {% endfor %}
-                                        </select>
+                                        </ul>
                                     </div>
-                                </div><!-- /.form-group -->
+                                    {% endif %}
+                                </div>
+                            </div><!-- /.form-group -->
+                            <div class="form-inline-group">
+                                <div class="mb-4">
+                                    <label for="{{ form.current_kml.id_for_label }}" class="inline-label">
+                                        {{ form.current_km.label }}
+                                    </label>
+                                </div>
+                                {{form.current_km}}
+                                {% if form.current_km.errors %}
+                                <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    <ul class="list-none m-0 p-0">
+                                        {% for error in form.current_km.errors %}
+                                        <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </div>
+                    </div><!-- /.form-group -->
 
-                                <div class="form-group relative">
-                                    <input type="file" class="form-control">
-                                    <label> تصویر پلاک</label>
-                                    <div class="input-group round">
-                                        <input type="text" class="form-control file-input"
-                                            placeholder="برای آپلود کلیک کنید">
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-success">
-                                                <i class="icon-picture"></i>
-                                                آپلود عکس
-                                            </button>
-                                        </span>
-                                    </div><!-- /.input-group -->
-                                    <div class="form-group relative">
-                                        <input type="file" class="form-control">
-                                        <label> تصویر کیلومتر</label>
-                                        <div class="input-group round">
-                                            <input type="text" class="form-control file-input"
-                                                placeholder="برای آپلود کلیک کنید">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-success">
-                                                    <i class="icon-picture"></i>
-                                                    آپلود عکس
-                                                </button>
-                                            </span>
-                                        </div><!-- /.input-group -->
-                                        <div class="help-block"></div>
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-body -->
+                    <div class="form-inline-group">
+                        <div class="mb-3">
+                            <label for="{{ form.color.id_for_label }}" class="inline-label">
+                                {{ form.color.label }}
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <select class="form-select" name="color">
+                                {% for value, label in form.fields.color.choices %}
+                                <option value="{{ value }}" {% if form.color.value == value %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div><!-- /.form-group -->
 
-                                <div class="form-actions text-center">
-                                    <button type="submit" class="btn btn-success btn-round btn-lg">
-                                        <i class="icon-check"></i>
-                                        ادامه
+                    <div class="form-group relative">
+                        <input type="file" class="form-control">
+                        <label> تصویر پلاک</label>
+                        <div class="input-group round">
+                            <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success">
+                                    <i class="icon-picture"></i>
+                                    آپلود عکس
+                                </button>
+                            </span>
+                        </div><!-- /.input-group -->
+                        <div class="form-group relative">
+                            <input type="file" class="form-control">
+                            <label> تصویر کیلومتر</label>
+                            <div class="input-group round">
+                                <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success">
+                                        <i class="icon-picture"></i>
+                                        آپلود عکس
                                     </button>
-                                </div><!-- /.form-actions -->
-                        </form>
-                    </div><!-- /.portlet-body -->
-                </div><!-- /.portlet -->
+                                </span>
+                            </div><!-- /.input-group -->
+                            <div class="help-block"></div>
+                        </div><!-- /.form-group -->
+                    </div><!-- /.form-body -->
 
-                <!-- /.portlet -->
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        const inputs = document.querySelectorAll(".plaque-input");
-                        inputs.forEach((input, index) => {
-                            input.addEventListener("input", function() {
-                                const maxLength = input.getAttribute("maxlength");
-                                if (input.value.length >= maxLength) {
-                                    const nextInput = inputs[index + 1];
-                                    if (nextInput) {
-                                        nextInput.focus();
-                                    }
+                    <div class="form-actions text-center">
+                        <button type="submit" class="btn btn-success btn-round btn-lg">
+                            <i class="icon-check"></i>
+                            ادامه
+                        </button>
+                    </div><!-- /.form-actions -->
+                    </form>
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const inputs = document.querySelectorAll(".plaque-input");
+                    inputs.forEach((input, index) => {
+                        input.addEventListener("input", function() {
+                            const maxLength = input.getAttribute("maxlength");
+                            if (input.value.length >= maxLength) {
+                                const nextInput = inputs[index + 1];
+                                if (nextInput) {
+                                    nextInput.focus();
                                 }
-                            });
-                            input.addEventListener("keydown", function(e) {
-                                if (e.key === "Backspace" && input.value.length === 0) {
-                                    const prevInput = inputs[index - 1];
-                                    if (prevInput) {
-                                        prevInput.focus();
-                                    }
+                            }
+                        });
+                        input.addEventListener("keydown", function(e) {
+                            if (e.key === "Backspace" && input.value.length === 0) {
+                                const prevInput = inputs[index - 1];
+                                if (prevInput) {
+                                    prevInput.focus();
                                 }
-                            });
+                            }
                         });
                     });
-                </script>
+                });
+            </script>
 
-                {% endblock %}
+            {% endblock %}

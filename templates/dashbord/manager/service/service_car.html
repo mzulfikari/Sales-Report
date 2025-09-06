@@ -34,107 +34,53 @@
                         </div><!-- /.portlet-title -->
 
                     </div><!-- /.portlet-heading -->
-                    <div class="portlet-body">
-                        <form role="form">
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <div class="form-group round">
-                                        <div class="form-group row ">
-                                            <label class="col-3">
-                                                <div class="mt-1">قیمت روغن   </div>
-                                            </label>
-                                            <div class="col-9">
-                                                <div class="col-9">
-                                                    <input type="text" class="form-control ltr numeric separate"
-                                                        id="amount"
-                                                        class="form-control text-right ltr numeric separate">
-                                                </div>
-                                            </div><!-- .col -->
-                                        </div><!-- /.form-group -->
-                                        <div class="form-group row ">
-                                            <label class="col-3">
-                                                <div class="mt-1"> لنت خودرو</div>
-                                            </label>
-                                            <div class="col-9">
-                                                <div class="col-9">
-                                                    <input type="text" class="form-control ltr numeric separate"
-                                                        id="amount"
-                                                        class="form-control text-right ltr numeric separate">
-                                                </div>
-                                            </div><!-- .col -->
-                                        </div><!-- /.form-group -->
-                                        <div class="form-group row ">
-                                            <label class="col-3">
-                                                <div class="mt-1">مبلغ</div>
-                                            </label>
-                                            <div class="col-9">
-                                                <div class="col-9">
-                                                    <input type="text" class="form-control ltr numeric separate"
-                                                        id="amount"
-                                                        class="form-control text-right ltr numeric separate">
-                                                </div>
-                                            </div><!-- .col -->
-                                        </div><!-- /.form-group -->
-                                        <div class="form-group row ">
-                                            <label class="col-3">
-                                                <div class="mt-1">مبلغ</div>
-                                            </label>
-                                            <div class="col-9">
-                                                <div class="col-9">
-                                                    <input type="text" class="form-control ltr numeric separate"
-                                                        id="amount"
-                                                        class="form-control text-right ltr numeric separate">
-                                                </div>
-                                            </div><!-- .col -->
-                                        </div><!-- /.form-group -->
+                    <form>
+                        <div class="form-group d-flex align-items-center">
+                            <label class="me-2">برند روغن:</label>
+                            <select class="form-select form-select-sm" style="width:150px;">
+                                {% for service in title %}
+                                <option value="0">انتخاب کنید</option>
+                                <option value="{{ value }}">
+                                {% if service.value == value %}selected{% endif %}>{{ label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-                                        <div class="form-group row ">
-                                            <label class="col-3">
-                                                <div class="mt-1">مبلغ</div>
-                                            </label>
-                                            <div class="col-9">
-                                                <div class="col-9">
-                                                    <input type="text" class="form-control ltr numeric separate"
-                                                        id="amount"
-                                                        class="form-control text-right ltr numeric separate">
-                                                </div>
-                                            </div><!-- .col -->
-                                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <div class="form-group round">
+                                <div class="form-group row ">
+                                    <label class="col-3">
+                                        <div class="mt-1">قیمت روغن</div>
+                                    </label>
+                                    <div class="col-9">
+                                        <div class="col-9 input-right">
+                                            <input type="text" class="form-control w-auto" id="amount">
+                                        </div>
+                                    </div><!-- .col -->
+                                </div><!-- /.form-group -->
 
-                                        <div class="form-group row ">
-                                            <label class="col-3">
-                                                <div class="mt-1">مبلغ</div>
-                                            </label>
-                                            <div class="col-9">
-                                                <div class="col-9">
-                                                    <input type="text" class="form-control ltr numeric separate"
-                                                        id="amount"
-                                                        class="form-control text-right ltr numeric separate">
-                                                </div>
-                                            </div><!-- .col -->
-                                        </div><!-- /.form-group -->
-                                        <div class="help-block"></div>
-                                    </div><!-- /.form-group -->
-                                </div><!-- /.form-body -->
+                            </div><!-- /.form-body -->
 
-                                <div class="form-actions text-center">
-                                    <button type="submit" class="btn btn-success btn-round btn-lg">
-                                        <i class="icon-check"></i>
-                                        ادامه
-                                    </button>
-                                </div><!-- /.form-actions -->
-                        </form>
-                    </div><!-- /.portlet-body -->
-                </div><!-- /.portlet -->
+                            <div class="form-actions text-center">
+                                <button type="submit" class="btn btn-success btn-round btn-lg">
+                                    <i class="icon-check"></i>
+                                    ثبت سرویس
+                                </button>
+                            </div><!-- /.form-actions -->
+                    </form>
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+            </form>
 
-                <!-- Script to separate three price digits-->
-                <script>
-                    document.getElementById('amount').addEventListener('input', function(e) {
-                        let value = e.target.value.replace(/,/g, '');
-                        if (!isNaN(value)) {
-                            e.target.value = Number(value).toLocaleString('en-US');
-                        }
-                    });
-                </script>
+            <!-- Script to separate three price digits-->
+            <script>
+                document.getElementById('amount').addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/,/g, '');
+                    if (!isNaN(value)) {
+                        e.target.value = Number(value).toLocaleString('en-US');
+                    }
+                });
+            </script>
 
-                {% endblock %}
+            {% endblock %}
