@@ -34,11 +34,13 @@
                                 <i class="icon-settings"></i>
                                 مشخصات خودرو
                             </h3>
-                        </div><!-- /.portlet-title -->
-
-                    </div><!-- /.portlet-heading -->
+                        </div>
+                        <!-- /.portlet-title -->
+                    </div>
+                    <!-- /.portlet-heading -->
                     <div class="portlet-body">
-                        <form role="form">
+                        <form role="form" method="post">
+                            {% csrf_token %}
                             <div class="form-body">
                                 <div class="form-group">
                                     <div class="form-inline-group">
@@ -59,7 +61,6 @@
                                         </div>
                                         {% endif %}
                                     </div>
-
                                     <!-- /.form-group -->
                                     <div class="form-inline-group">
                                         <div class="mb-4">
@@ -78,7 +79,6 @@
                                             </ul>
                                         </div>
                                         {% endif %}
-
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-inline-group">
@@ -105,15 +105,14 @@
                                         </div>
                                         {% endif %}
                                     </div>
-
-                                </div><!-- /.form-group -->
+                                </div>
+                                <!-- /.form-group -->
                                 <div class="form-inline-group">
                                     <div class="mb-4">
                                         <label for="{{ form.car_model.id_for_label }}" class="inline-label">
                                             {{ form.car_model.label }}
                                         </label>
                                     </div>
-
                                     {{form.car_model}}
                                     {% if form.car_model.errors %}
                                     <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
@@ -126,7 +125,8 @@
                                     </div>
                                     {% endif %}
                                 </div>
-                            </div><!-- /.form-group -->
+                            </div>
+                            <!-- /.form-group -->
                             <div class="form-inline-group">
                                 <div class="mb-4">
                                     <label for="{{ form.current_kml.id_for_label }}" class="inline-label">
@@ -134,19 +134,17 @@
                                     </label>
                                 </div>
                                 {{form.current_km}}
+                                
                                 {% if form.current_km.errors %}
-                                <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                    <i class="bi bi-exclamation-circle-fill"></i>
-                                    <ul class="list-none m-0 p-0">
-                                        {% for error in form.current_km.errors %}
-                                        <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                <ul class="text-red-600 text-sm mt-1 list-none p-0">
+                                    {% for error in form.current_km.errors %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
                                 {% endif %}
                             </div>
-                    </div><!-- /.form-group -->
-
+                    </div>
+                    <!-- /.form-group -->
                     <div class="form-inline-group">
                         <div class="mb-3">
                             <label for="{{ form.color.id_for_label }}" class="inline-label">
@@ -162,8 +160,8 @@
                                 {% endfor %}
                             </select>
                         </div>
-                    </div><!-- /.form-group -->
-
+                    </div>
+                    <!-- /.form-group -->
                     <div class="form-group relative">
                         <input type="file" class="form-control">
                         <label> تصویر پلاک</label>
@@ -182,7 +180,7 @@
                             <div class="input-group round">
                                 <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-success">
+                                    <button type="submit" class="btn btn-success">
                                         <i class="icon-picture"></i>
                                         آپلود عکس
                                     </button>
@@ -190,18 +188,22 @@
                             </div><!-- /.input-group -->
                             <div class="help-block"></div>
                         </div><!-- /.form-group -->
-                    </div><!-- /.form-body -->
-
+                    </div>
+                    <!-- /.form-body -->
                     <div class="form-actions text-center">
                         <button type="submit" class="btn btn-success btn-round btn-lg">
                             <i class="icon-check"></i>
                             ادامه
                         </button>
-                    </div><!-- /.form-actions -->
-                    </form>
-                </div><!-- /.portlet-body -->
-            </div><!-- /.portlet -->
+                    </div>
+                    <!-- /.form-actions -->
 
+                </div>
+
+                <!-- /.portlet-body -->
+            </div>
+            </form>
+            <!-- /.portlet -->
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     const inputs = document.querySelectorAll(".plaque-input");

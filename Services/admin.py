@@ -5,19 +5,18 @@ from jalali_date.admin import ModelAdminJalaliMixin
 
 
 @admin.register(Services)
-class ProductAdmin(admin.ModelAdmin):
+class ServicesAdmin(admin.ModelAdmin):
     
     list_display = (
         "store",
         "sold_by",
         "car",
-        "next_km",
         "get_created_jalali",
         "show_image",
         "amount_total",)
     
     search_fields=(
-        "get_created_jalali",
+        "created_at",
         )
     
     list_filter = (

@@ -60,7 +60,9 @@ class PlateField(forms.MultiValueField):
 
 class InformationCar(forms.ModelForm):
     """Vehicle registration form"""
+    sold_by = forms.IntegerField(required=False)
     plaque = PlateField(label='شماره پلاک')
+    
     class Meta:
         model = Services   
         fields  = ('customer_phone','car','car_model','color','current_km',)
@@ -73,7 +75,7 @@ class InformationCar(forms.ModelForm):
         }
         
         widgets = {
-            'customer_phone': forms.TextInput(
+            'customer_phone': forms.NumberInput(
             attrs={'class':
             "form-control text-right ltr numeric",
             }),
@@ -81,17 +83,17 @@ class InformationCar(forms.ModelForm):
             attrs={'class':
             "form-control",
             }),
-            'car_model': forms.TextInput(
+            'car_model': forms.NumberInput(
             attrs={'class':
             "form-control",
             }),
-            'current_km': forms.TextInput(
+            'current_km': forms.NumberInput(
             attrs={'class':
             "form-control text-right ltr numeric",
             }),
         }
         
-    def clean_phone(self):
+    def clean_customer_phone(self):
         """ Verification of telephone number entry in Iran """
         customer_phone = self.cleaned_data.get('phone')
         if customer_phone is None:
@@ -107,9 +109,9 @@ class InformationCar(forms.ModelForm):
         """ Error handling for vehicle names """
         car = self.cleaned_data.get('car')
         if len(car) < 3:
-            raise ValidationError("نام خودرو حدداقل باید سه کلمه باشد.")
-        if len(car) > 12:
-            raise ValidationError("نام خودرو حداکثر باید دوازده کلمه باشد..")
+            raise ValidationError("نام خودرو حدداقل باید سه حرف باشد.")
+        if len(car) > 30:
+            raise ValidationError("نام خودرو حداکثر باید سی حرف باشد..")
         return car
     
     def clean_car_model(self):
@@ -124,17 +126,9 @@ class InformationCar(forms.ModelForm):
         return car_model
     
     def clean_current_km(self):
-        """ Error handling for km """
         current_km = self.cleaned_data.get('current_km')
-        if not current_km:
-             raise forms.ValidationError('لطفاً مقدار کیلومتر فعلی را وارد کنید.')
-        if not str(current_km).isdigit():
-         raise forms.ValidationError('کیلومتر فعلی باید فقط شامل عدد باشد.')
-     
-
-         
-class ServiceAdd(forms.ModelForm):
-    
-     class Meta:
-        model = Services   
-        fields  = ('customer_phone','car','car_model','color','current_km','plaque',)
+        if current_km is None:
+            raise ValidationError('لطفاً مقدار کیلومتر فعلی را وارد کنید.')
+        if current_km < 0:
+            raise ValidationError('کیلومتر نمی‌تواند منفی باشد.')
+        return current_km

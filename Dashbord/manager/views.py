@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse, reverse_lazy
 from django.views.generic import View
 from django.views.generic import TemplateView
 from ..forms import InformationCar
@@ -23,10 +24,12 @@ class InformationCarAdd(LoginRequiredMixin,View):
         form = InformationCar(request.POST)
         if form.is_valid():
             infocar = form.save(commit=False)
-            infocar.user = request.user  
-            return redirect('Profile:Address') 
+            infocar.sold_by = request.user
+            infocar.store = request.user.managed_stores.get()
+            infocar.save()  
+            return  redirect("Dashboard:manager:ServicesAdd", car_id=infocar.id)
         else:      
-            return render (request,'dashbord/manager/dashbord/manager.html',{'form':form})
+            return render (request,'dashbord/manager/service/info_car.html',{'form':form})
     
 class InvoiceViews(TemplateView):
     

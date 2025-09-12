@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ValidationError
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext as _
 from Store.models import Store,Product
 from account.models import User
@@ -56,13 +57,13 @@ class Services(models.Model):
         null=True,blank=True,verbose_name=_('تعداد محصول')
         )
     product_total = models.DecimalField(
-        max_digits=10,decimal_places=0,verbose_name=_('قیمت مجموع محصولات')
+        max_digits=10,decimal_places=0,verbose_name=_('قیمت مجموع محصولات'),null=False,default=0
     )
     service_price = models.DecimalField(
-        max_digits=10,decimal_places=0,verbose_name=_('قیمت سرویس ')
+        max_digits=10,decimal_places=0,verbose_name=_('قیمت سرویس '),null=False,default=0
         )
     amount_total = models.DecimalField(
-        max_digits=10,decimal_places=0,verbose_name=_('قیمت کل')
+        max_digits=10,decimal_places=0,verbose_name=_('قیمت کل'),null=False,default=0
     )
     plaque = models.CharField(
       max_length=10, null=True,blank=True,verbose_name=_('شماره پلاک')
@@ -78,10 +79,10 @@ class Services(models.Model):
     )
     
     def show_image(self):  
-     if self.image:
-       return format_html(f'<img src="{self.image.url}" width="78 px" height="50" />')
+     if self.image_plaque:
+       return format_html(f'<img src="{self.image_plaque.url}" width="78 px" height="50" />')
      return format_html('<h3 style="color: red">تصویر ندارد</h3>')
-    show_image.short_description = " تصاویر"
+    show_image.short_description = " تصویر پلاک"
 
 
     class Meta:
