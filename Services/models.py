@@ -83,6 +83,10 @@ class Services(models.Model):
        return format_html(f'<img src="{self.image_plaque.url}" width="78 px" height="50" />')
      return format_html('<h3 style="color: red">تصویر ندارد</h3>')
     show_image.short_description = " تصویر پلاک"
+    
+    
+    def __str__(self):
+       return self.customer_phone
 
 
     class Meta:

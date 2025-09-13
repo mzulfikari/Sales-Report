@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     
     #jalali_date
     'jalali_date',
+    'django_jalali',
+
     
     #my_app 
     'Services.apps.ServicesConfig',

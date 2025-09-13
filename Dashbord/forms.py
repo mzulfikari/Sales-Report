@@ -3,8 +3,7 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from Services.models import Services
 
-     
-        
+
 class Plaque(forms.MultiWidget):
     """     
     To implement the appearance of the license plate number form in the template
@@ -41,6 +40,7 @@ class Plaque(forms.MultiWidget):
         return value.split("-")
      return ["", "", "", ""]
     
+    
 class PlateField(forms.MultiValueField):
     """
     Unifying the license plate number inputs and then saving in the field related to the license plate 
@@ -58,26 +58,29 @@ class PlateField(forms.MultiValueField):
      if data_list:
         return "-".join(data_list)
 
+
 class InformationCar(forms.ModelForm):
     """Vehicle registration form"""
     sold_by = forms.IntegerField(required=False)
-    plaque = PlateField(label='شماره پلاک')
+    plaque = PlateField(label=' شماره پلاک :')
     
     class Meta:
         model = Services   
         fields  = ('customer_phone','car','car_model','color','current_km',)
         labels = {
-            'customer_phone': 'شماره تلفن',
-            'car': 'نام خودرو',
-            'car_model': 'مدل خودرو',
+            'customer_phone': 'شماره تلفن :',
+            'car': 'نام خودرو :',
+            'car_model': ' مدل خودرو :',
             'color': 'رنگ',
-            'current_km': 'کیلومتر فعلی',
+            'current_km': ' کیلومترفعلی :',
         }
         
         widgets = {
-            'customer_phone': forms.NumberInput(
-            attrs={'class':
-            "form-control text-right ltr numeric",
+            'customer_phone': forms.TextInput(
+            attrs={
+            'class': "form-control text-right ltr numeric",
+            'inputmode': 'numeric',
+            'pattern': '[0-9]*',
             }),
             'car': forms.TextInput(
             attrs={'class':
@@ -87,23 +90,25 @@ class InformationCar(forms.ModelForm):
             attrs={'class':
             "form-control",
             }),
-            'current_km': forms.NumberInput(
+            'current_km': forms.TextInput(
             attrs={'class':
             "form-control text-right ltr numeric",
             }),
         }
         
+        
     def clean_customer_phone(self):
         """ Verification of telephone number entry in Iran """
-        customer_phone = self.cleaned_data.get('phone')
-        if customer_phone is None:
-            customer_phone = ''
+        customer_phone = self.cleaned_data.get('customer_phone')
+        if not customer_phone:
+            raise ValidationError("شماره تلفن الزامی است.")
         if customer_phone:
             if not customer_phone.startswith('09'):
                 raise ValidationError("شماره تلفن باید با 09 شروع شود.")
             if len(customer_phone) != 11:
                 raise ValidationError("شماره تلفن باید 11 رقم باشد.")
         return customer_phone
+    
     
     def clean_car(self):
         """ Error handling for vehicle names """
@@ -114,21 +119,28 @@ class InformationCar(forms.ModelForm):
             raise ValidationError("نام خودرو حداکثر باید سی حرف باشد..")
         return car
     
+    
     def clean_car_model(self):
         """ Error handling for vehicle models"""
         car_model = self.cleaned_data.get('car_model')
         if not car_model:
-             raise forms.ValidationError('مدل خودرو نمی‌تواند خالی باشد.')
+         return None
         if not str(car_model).isdigit():
              raise forms.ValidationError('مدل خودرو باید فقط شامل عدد باشد.')
         if len(car_model) < 2 or len(car_model) > 4:
             raise forms.ValidationError('مدل خودرو باید بین 2 تا 4 رقم باشد.')
         return car_model
     
+    
     def clean_current_km(self):
-        current_km = self.cleaned_data.get('current_km')
-        if current_km is None:
-            raise ValidationError('لطفاً مقدار کیلومتر فعلی را وارد کنید.')
-        if current_km < 0:
-            raise ValidationError('کیلومتر نمی‌تواند منفی باشد.')
-        return current_km
+     current_km = self.cleaned_data.get('current_km')
+     if not current_km:
+        return None
+     try:
+         current_km = float(current_km)
+     except (ValueError, TypeError):
+        raise ValidationError("کیلومتر باید یک عدد معتبر باشد.")
+     if current_km < 0:
+        raise ValidationError("کیلومتر نمی‌تواند منفی باشد.")
+     return current_km
+ 

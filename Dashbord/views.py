@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from account.models import UserType
+from django.utils import timezone
 
 class DashbordViews(LoginRequiredMixin,View):
     """
@@ -21,5 +22,6 @@ class DashbordViews(LoginRequiredMixin,View):
         return super().dispatch(request, *args, **kwargs)
         
     
-
-    
+def my_view(request):
+    now = timezone.now()  # گرفتن تاریخ و زمان فعلی
+    return render(request, "my_template.html", {"current_time": now})  

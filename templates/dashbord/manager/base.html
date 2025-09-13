@@ -24,7 +24,7 @@
     <link href="{% static 'plugins/iCheck/skins/square/_all.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/colors.css' %}" rel="stylesheet">
-    
+    <link rel="stylesheet" href="{% static 'css/toastify.css' %}">   
 
     {% block extra_css %} {% endblock extra_css %}
 
@@ -225,7 +225,7 @@
         </div><!-- /.r-->
         {% block content %} {% endblock content %}
 
-        <!-- BEGIN SETTING -->
+        {% comment %} <!-- BEGIN SETTING -->
         <div class="settings d-none d-sm-block">
             <a href="#" class="btn" id="toggle-setting">
                 <i class="icon-settings"></i>
@@ -327,7 +327,7 @@
                 <img class="img-bottom light" src="{% static 'images/logo.png' %}">
             </div><!-- /.img-box -->
         </div><!-- /.settings -->
-        <!-- END SETTING -->
+        <!-- END SETTING --> {% endcomment %}
 
         <!-- BEGIN CODE MODAL -->
         <div class="modal fade" id="code-modal" role="dialog" tabindex="-1">
@@ -349,6 +349,7 @@
         <div class="sidebar-overlay"></div>
 
         <!-- BEGIN JS -->
+        <script src="{% static 'js/toastify.js' %}"></script>
         <script src="{% static 'plugins/jquery/dist/jquery-3.6.1.min.js' %}"></script>
         <script src="{% static 'plugins/bootstrap/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'plugins/metisMenu/dist/metisMenu.min.js' %}"></script>
@@ -368,6 +369,7 @@
         <script src="{% static 'plugins/ammap3/ammap/ammap.js' %}"></script>
         <script src="{% static 'plugins/ammap3/ammap/maps/js/iranHighFa.js' %}"></script>
         <script src="{% static 'js/pages/dashboard2.js' %}"></script>
+        
         <!-- END PAGE JAVASCRIPT -->
 </body>
 
