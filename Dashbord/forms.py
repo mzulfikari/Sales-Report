@@ -15,20 +15,18 @@ class Plaque(forms.MultiWidget):
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
                        'style': 'width: 60px; letter-spacing: 2px;',
                        }),
-             forms.TextInput(
+            forms.TextInput(
                 attrs={'maxlength': '1',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
                        'style': 'width: 50px; letter-spacing: 2px;',
                        'placeholder': 'الف',
                        'data-type': 'two-digit' 
                        }),
-           
             forms.TextInput(
                 attrs={'maxlength': '3',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm', 
                        'style': 'width: 80px; letter-spacing: 2px;',
                        }),
-            
             forms.TextInput(
                 attrs={'maxlength': '2',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
@@ -40,9 +38,11 @@ class Plaque(forms.MultiWidget):
         
     def decompress(self, value):
      if value:
-        return value.split("-")
+        parts = value.split("-")
+        if len(parts) == 4:
+            return [parts[3], parts[2], parts[1], parts[0]]
      return ["", "", "", ""]
-    
+
     
 class PlateField(forms.MultiValueField):
     """
@@ -58,14 +58,15 @@ class PlateField(forms.MultiValueField):
         super().__init__(fields, widget=Plaque(), *args, **kwargs)
 
     def compress(self, data_list):
-     if data_list:
-        return "-".join(data_list)
+      if data_list and len(data_list) == 4:
+        return "-".join([data_list[3], data_list[2], data_list[1], data_list[0]])
+      return ""
 
 
 class InformationCar(forms.ModelForm):
     """Vehicle registration form"""
     sold_by = forms.IntegerField(required=False)
-    plaque = PlateField(label=' شماره پلاک :')
+    plaque = PlateField(label='  پلاک :')
     
     class Meta:
         model = Services   

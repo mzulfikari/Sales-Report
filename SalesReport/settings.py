@@ -25,15 +25,15 @@ INSTALLED_APPS = [
     #jalali_date
     'jalali_date',
     'django_jalali',
-
     
     #my_app 
     'Services.apps.ServicesConfig',
     'account.apps.AccountConfig',
     'Store.apps.StoreConfig',
     'Dashbord.apps.DashbordConfig',
-      
-
+    
+    #liblary
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

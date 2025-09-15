@@ -24,10 +24,12 @@ class InformationCarAdd(LoginRequiredMixin,View):
         form = InformationCar(request.POST, request.FILES)
         if form.is_valid():
               infocar = form.save(commit=False)
+              infocar.plaque = form.cleaned_data.get("plaque")
               infocar.sold_by = request.user
               infocar.store = request.user.managed_stores.get()
               infocar.save()  
               return  redirect("Dashboard:manager:ServicesAdd", car_id=infocar.id)
+            
         else:
              for field, field_errors in form.errors.items():
                 for error in field_errors:
