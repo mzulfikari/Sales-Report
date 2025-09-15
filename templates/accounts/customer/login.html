@@ -1,85 +1,91 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
+    <head>
+        <title>صحفه ورود</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description">
+        <meta name="keywords" content="قالب مدیریت, قالب داشبورد, قالب ادمین, قالب مدیران, قالب مدیریت راستچین , قالب ایرانی مدیریت, پوسته مدیریت, قالب ادمین داشبورد سایت, قالب مدیریتی, مدیران, قالب مدیریت مدیران, پنل مدیریت, پنل مدیریت مدرن, قالب ادمین متریال, قالب مدیریت بوت استرپ, قالب ادمین بوتسترپ, قالب ادمین سایت, پوسته مدیریتی ایرانی, قالب مدیرتی مدیران ایرانی, بهترین قالب مدیریت, قالب مدیریت ریسپانسیو, قالب مدیریت ارزان, قالب admin">
+        <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>ورود</title>
-    {% comment %}
-    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" /> {% endcomment %}
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/plugins.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/authentication/form-2.css' %}" rel="stylesheet" type="text/css" />
-    <!-- END GLOBAL MANDATORY STYLES -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/forms/theme-checkbox-radio.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/forms/switches.css' %}">
-</head>
-<body class="form">
-    <div class="form-container outer">
-        <div class="form-form">
-            <div class="form-form-wrap">
-                <div class="form-container">
-                    <div class="form-content">
-                        <h1 class="">ورود</h1>
-                        <p class="">برای مشاهده جزئیات سرویس خودرو شماره موبایل خود را وارد کنید</p>
+        <!-- BEGIN CSS -->
+        <link href="{% static 'plugins/bootstrap/bootstrap5/css/bootstrap.rtl.min.css' %}" rel="stylesheet">
+        <link href="{% static 'plugins/simple-line-icons/css/simple-line-icons.min.css' %}" rel="stylesheet">
+        <link href="{% static 'plugins/sweetalert2/dist/sweetalert2.min.css' %}" rel="stylesheet">
+        <link href="{% static 'plugins/paper-ripple/dist/paper-ripple.min.css' %}" rel="stylesheet">
+        <link href="{% static 'plugins/iCheck/skins/square/_all.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'css/colors.css' %}" rel="stylesheet">
+        <!-- END CSS -->
+        
+        
+    </head>
+    <body class="fix-header active-ripple modal-wrapper">
+        <!-- BEGIN LOEADING -->
+        <div id="loader">
+            <div class="spinner"></div>
+        </div><!-- /.loader -->
+        <!-- END LOEADING -->
+        
+        <!-- BEGIN WRAPPER -->
+        <div class="fixed-modal-bg"></div>
+        <a href="#" class="btn btn-primary btn-icon btn-round btn-lg" id="toggle-dark-mode">
+            <i class="icon-bulb"></i>
+        </a>
+        <a href="dashboard.html" class="btn btn-primary btn-icon btn-round btn-lg btn-back">
+            <i class="icon-arrow-right-circle"></i>
+        </a>
+        <div class="modal-page shadow">
+            <div class="container-fluid">                
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <div class="logo-con m-t-10 m-b-10">
+                            <img src="{% static 'images/logo-dark.png' %}" class="dark-logo center-block img-responsive" alt="logo">
+                            <img src="{% static 'images/logo.png' %}" class="light-logo center-block img-responsive" alt="logo">
+                        </div><!-- /.logo-con -->
 
-                        <form class="text-riht" method="post" id="login-form">
-                            {% csrf_token %}
-                            <span class="input-group-text">
-                                <div class="form">
-                                    <div id="username-field" class="field-wrapper input">
-
-                                        <label for="{{ form.phone_customer.id_for_label }}"
-                                            style="font-size:18px; font-weight:bold;">
-                                            {{ form.phone_customer.label }}
-                                        </label>
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                            </span>
-                            {{ form.phone_customer }}
-                            {% if form.phone_customer.errors %}
-                            <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                <i class="bi bi-exclamation-circle-fill"></i>
-                                <ul class="list-none m-0 p-0">
-                                    {% for error in form.phone_customer.errors %}
-                                    <li>{{ error }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            {% endif %}
-
-                    </div>
-                    <div class="d-flex justify-content-between my-2 my-md-4">
-                        <div class="field-wrapper">
-                            <button type="submit" class="btn btn-primary" value="">ارسال کد</button>
-                        </div>
-                    </div>
-                    <div class="division">
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="{% static 'js/libs/jquery-3.1.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    <!-- END GLOBAL MANDATORY SCRIPTS -->
-    <script src="{% static 'js/authentication/form-2.js' %}"></script>
-
-</body>
-
+                        <h2 class="text-center m-b-20">ورود</h2>
+                        <hr>
+                        <form id="form" class="m-t-30 m-b-30" action="dashboard.html" method="POST" role="form"> 
+                             <div class="form-group round row">
+                                                <label class="col-sm-3">شماره تلفن </label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" placeholder="نام">
+                                                </div>
+                                            </div><!-- /.form-group -->
+                                        </div><!-- /.form-body -->
+                           
+                            <p>
+                                <button class="btn btn-success btn-block" type="submit">
+                                    <i class="icon-login font-lg"></i>
+                                    ورود
+                                </button>
+                            </p>
+                        </form>
+                       
+                    </div><!-- /.col-md-12 -->                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div><!-- /.modal-page -->
+        <!-- END WRAPPER -->
+        
+        <!-- BEGIN JS -->
+        <script src="{% static 'plugins/jquery/dist/jquery-3.6.1.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-migrate/jquery-migrate-1.2.1.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'plugins/paper-ripple/dist/PaperRipple.min.js' %}"></script>
+        <script src="{% static 'plugins/sweetalert2//dist/sweetalert2.min.js' %}"></script>
+        <script src="{% static 'plugins/iCheck/icheck.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'plugins/jquery-validation/src/localization/messages_fa.js' %}"></script>
+        <script src="{% static 'js/core.js' %}"></script>
+        
+        <!-- BEGIN PAGE JAVASCRIPT -->
+        <script src="{% static 'js/pages/login.js' %}"></script>
+        <!-- END PAGE JAVASCRIPT -->
+                
+    </body>
 </html>

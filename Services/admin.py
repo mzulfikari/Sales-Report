@@ -9,11 +9,12 @@ class ServicesAdmin(admin.ModelAdmin):
     
     list_display = (
         "store",
+        "customer_phone",
         "sold_by",
         "car",
-        "get_created_jalali",
         "show_image",
-        "amount_total",)
+        "amount_total",
+        "get_created_jalali",)
     
     search_fields=(
         "created_at",

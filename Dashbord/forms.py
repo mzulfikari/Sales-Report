@@ -19,7 +19,9 @@ class Plaque(forms.MultiWidget):
                 attrs={'maxlength': '1',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
                        'style': 'width: 50px; letter-spacing: 2px;',
-                       'placeholder': 'الف'}),
+                       'placeholder': 'الف',
+                       'data-type': 'two-digit' 
+                       }),
            
             forms.TextInput(
                 attrs={'maxlength': '3',
@@ -31,6 +33,7 @@ class Plaque(forms.MultiWidget):
                 attrs={'maxlength': '2',
                        'class': 'form-control plaque-input text-center fw-bold border rounded shadow-sm',
                        'style': 'width: 60px; letter-spacing: 2px;',
+                       'placeholder': '54',
                        }),
         ]
         super().__init__(widgets, attrs)
@@ -88,7 +91,7 @@ class InformationCar(forms.ModelForm):
             }),
             'car_model': forms.NumberInput(
             attrs={'class':
-            "form-control",
+            "form-control text-right ltr numeric",
             }),
             'current_km': forms.TextInput(
             attrs={'class':

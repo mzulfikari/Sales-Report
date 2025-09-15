@@ -7,7 +7,7 @@ class CustomerVerfiy(forms.Form):
     phone_customer = forms.CharField(
         label="شماره موبایل",
         widget=forms.TextInput(attrs={
-            'class': 'form-control w-50',
+            'class': 'form-control ltr text-left',
             'style': 'width:350px; height:30px;',
         })
     )

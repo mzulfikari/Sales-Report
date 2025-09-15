@@ -1,8 +1,37 @@
 {% extends "dashbord/manager/base.html" %}
 {% block title %}سروریس جدید{% endblock title %}
 {% load static %}
-{% load jalali_tags %} 
+{% load jalali_tags %}
 {% block content %}
+
+
+<style>
+    .form-inline-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        direction: rtl;
+        flex-wrap: wrap;
+    }
+
+    .form-inline-row label {
+        flex: 0 0 130px;
+        text-align: right;
+        font-weight: 800;
+        font-size: 0.95rem;
+        margin: 0;
+        color: #000;
+    }
+
+    .form-inline-row input {
+        flex: 1;
+        min-width: 180px;
+        max-width: 100%;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.95rem;
+    }
+</style>
+
 
 <!-- BEGIN CSS -->
 <link href="{% static 'css\inputcar.css' %}" rel="stylesheet">
@@ -19,7 +48,9 @@
                         <li class="active">فرم ها</li>
                     </ul>
                     <div class="breadcrumb-left" style="font-weight: bold;">
-                       {% jalali_now "%Y-%m-%d" %}
+
+                        {% jalali_now "%Y-%m-%d" %}
+
                         <i class="icon-calendar"></i>
                     </div><!-- /.breadcrumb-left -->
                 </div><!-- /.breadcrumb-box -->
@@ -50,7 +81,6 @@
                                             </label>
                                         </div>
                                         {{ form.customer_phone }}
-                                        
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-inline-group">
@@ -72,24 +102,42 @@
                                         {% endif %}
                                     </div>
                                     <!-- /.form-group -->
+
+                                    <div class="mb-4">
+                                        <label for="{{ form.plaque.id_for_label }}" class="inline-label">
+                                            {{ form.plaque.label }}
+                                        </label>
+                                    </div>
+
+                                    <div class="d-flex gap-2 align-items-center mb-5" style="direction: ltr;">
+                                        {% for widget in form.plaque %}
+                                        {{ widget }}
+                                        {% endfor %}
+                                    </div>
+
+                                    {% if form.plaque.errors %}
+                                    <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
+                                        <i class="bi bi-exclamation-circle-fill"></i>
+                                        <ul class="list-none m-0 p-0">
+                                            {% for error in form.plaque.errors %}
+                                            <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                                    <!-- /.form-group -->
                                     <div class="form-inline-group">
                                         <div class="mb-4">
-                                            <label for="{{ form.plaque.id_for_label }}" class="inline-label">
-                                                {{ form.plaque.label }}
+                                            <label for="{{ form.car_model.id_for_label }}" class="inline-label">
+                                                {{ form.car_model.label }}
                                             </label>
                                         </div>
-
-                                        <div class="d-flex gap-2 align-items-center" style="direction: ltr;">
-                                            {% for widget in form.plaque %}
-                                            {{ widget }}
-                                            {% endfor %}
-                                        </div>
-
-                                        {% if form.plaque.errors %}
+                                        {{form.car_model}}
+                                        {% if form.car_model.errors %}
                                         <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
                                             <i class="bi bi-exclamation-circle-fill"></i>
                                             <ul class="list-none m-0 p-0">
-                                                {% for error in form.plaque.errors %}
+                                                {% for error in form.car_model.errors %}
                                                 <li>{{ error }}</li>
                                                 {% endfor %}
                                             </ul>
@@ -100,113 +148,65 @@
                                 <!-- /.form-group -->
                                 <div class="form-inline-group">
                                     <div class="mb-4">
-                                        <label for="{{ form.car_model.id_for_label }}" class="inline-label">
-                                            {{ form.car_model.label }}
+                                        <label for="{{ form.current_kml.id_for_label }}" class="inline-label">
+                                            {{ form.current_km.label }}
                                         </label>
                                     </div>
-                                    {{form.car_model}}
-                                    {% if form.car_model.errors %}
-                                    <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                        <i class="bi bi-exclamation-circle-fill"></i>
-                                        <ul class="list-none m-0 p-0">
-                                            {% for error in form.car_model.errors %}
-                                            <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
+                                    {{form.current_km}}
+                                    {% if form.current_km.errors %}
+                                    <ul class="text-red-600 text-sm mt-1 list-none p-0">
+                                        {% for error in form.current_km.errors %}
+                                        <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
                                     {% endif %}
                                 </div>
                             </div>
                             <!-- /.form-group -->
-                            <div class="form-inline-group">
-                                <div class="mb-4">
-                                    <label for="{{ form.current_kml.id_for_label }}" class="inline-label">
-                                        {{ form.current_km.label }}
-                                    </label>
-                                </div>
-                                {{form.current_km}}
+                            <div class="form-inline-row mb-3">
+                                <label for="{{ form.color.id_for_label }}">
+                                    {{ form.color.label }}
+                                </label>
 
-                                {% if form.current_km.errors %}
-                                <ul class="text-red-600 text-sm mt-1 list-none p-0">
-                                    {% for error in form.current_km.errors %}
-                                    <li>{{ error }}</li>
+                                <select id="{{ form.color.id_for_label }}" name="color"
+                                    class="form-select form-select-sm w-auto">
+                                    {% for value, label in form.fields.color.choices %}
+                                    <option value="{{ value }}" {% if form.color.value == value %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
                                     {% endfor %}
-                                </ul>
-                                {% endif %}
+                                </select>
                             </div>
-                    </div>
-                    <!-- /.form-group -->
-                    <div class="form-inline-group">
-                        <div class="mb-3">
-                            <label for="{{ form.color.id_for_label }}" class="inline-label">
-                                {{ form.color.label }}
-                            </label>
-                        </div>
-                        <div class="col-sm-9">
-                            <select class="form-select" name="color">
-                                {% for value, label in form.fields.color.choices %}
-                                <option value="{{ value }}" {% if form.color.value == value %}selected{% endif %}>
-                                    {{ label }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="form-group relative">
-                        <label class="inline-label mb-2 d-block">تصویر پلاک</label>
-                        <div class="input-group round">
-                            <input type="file" id="plate-image" name="image" accept="image/*" class="hidden" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-success"
-                                    onclick="document.getElementById('plate-image').click();">
-                                    <i class="icon-picture"></i> انتخاب تصویر
-                                </button>
-                            </span>
-                            <span id="file-name" class="ml-2 text-muted small"></span>
-                        </div>
-                        <div id="preview" class="mt-3 hidden">
-                            <img src="" alt="پیش‌نمایش تصویر" class="img-thumbnail"
-                                style="max-width: 100%; height: auto;" />
-                        </div>
-                    </div>
-
-                    <div class="form-group relative">
-                        <input type="file" class="form-control">
-
-                        <div class="mb-4">
-                            <label class="inline-label">
-                                تصویر پلاک
-                            </label>
-                            <div class="input-group round">
-                                <input type="file" name="image" class="hidden" accept="image/*" />
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="icon-picture"></i>
-                                        تصویر کیلومتر فعلی
-                                    </button>
-                                </span>
-                            </div><!-- /.input-group -->
-                            <div class="help-block"></div>
-                        </div><!-- /.form-group -->
+                            <div class="form-group relative">
+                                <input type="file" class="form-control">
+                                <label>آپلود فایل</label>
+                                <div class="input-group round">
+                                    <input type="text" class="form-control file-input"
+                                        placeholder="برای آپلود کلیک کنید">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success">
+                                            <i class="icon-picture"></i>
+                                            آپلود عکس
+                                        </button>
+                                    </span>
+                                </div><!-- /.input-group -->
+                            </div>
+                            <!-- /.form-group -->
                     </div>
                     <!-- /.form-body -->
-                    <div class="form-actions text-center">
-                        <button type="submit" class="btn btn-success btn-round btn-lg">
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn btn-success btn-round btn-lg px-5">
                             <i class="icon-check"></i>
                             ادامه
                         </button>
                     </div>
                     <!-- /.form-actions -->
-
                 </div>
-
                 <!-- /.portlet-body -->
             </div>
             </form>
             <!-- /.portlet -->
-            <!-- بعد JS لود شود -->
-<script src="{% static 'toastify/toastify.min.js' %}"></script>
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     const inputs = document.querySelectorAll(".plaque-input");
@@ -231,20 +231,5 @@
                     });
                 });
             </script>
-
-<script>
-{% if errors %}
-    {% for error in errors %}
-        Toastify({
-            text: "{{ error|escapejs }}",
-            duration: 5000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)"
-        }).showToast();
-    {% endfor %}
-{% endif %}
-</script>
 
             {% endblock %}
