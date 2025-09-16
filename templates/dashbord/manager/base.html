@@ -61,11 +61,11 @@
                             <i class="icon-user-following"></i>
                         </a>
                     </li>
-                    <li>
+                    {% comment %} <li>
                         <a href="#" class="btn" id="toggle-dark-mode">
                             <i class="icon-bulb"></i>
                         </a>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
                 <ul class="nav navbar-nav navbar-left">
                     <li class="dropdown">
@@ -209,7 +209,7 @@
         </div><!-- /#sidebar -->
         <!-- END SIDEBAR -->
 
-        <!-- END WRAPPER -->
+        {% comment %} <!-- END WRAPPER -->
         <div class="row footer-container">
             <div class="col-md-12">
                 <div class="copyright">
@@ -222,7 +222,9 @@
                     </p>
                 </div><!-- /.copyright --> 
             </div><!-- /.col-md-12 -->
-        </div><!-- /.r-->
+        </div> {% endcomment %}
+        <!-- /.r-->
+        
         {% block content %} {% endblock content %}
 
         {% comment %} <!-- BEGIN SETTING -->

@@ -28,7 +28,7 @@ class InformationCarAdd(LoginRequiredMixin,View):
               infocar.sold_by = request.user
               infocar.store = request.user.managed_stores.get()
               infocar.save()  
-
+              return  redirect("Dashboard:manager:ServicesAdd", car_id=infocar.id)
         else:
              for field, field_errors in form.errors.items():
                 for error in field_errors:

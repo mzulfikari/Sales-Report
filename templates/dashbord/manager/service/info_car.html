@@ -31,69 +31,61 @@
     }
 
     .plaque-group {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-        direction: ltr;
-        flex-wrap: wrap;
-    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    direction: ltr;
+    flex-wrap: nowrap; 
+    overflow-x: auto;  
+   
+}
 
-    .plaque-label {
-        flex: 0 0 130px;
-        font-weight: 800;
-        font-size: 0.95rem;
-        color: #000000c7;
-        margin: 0;
-        text-align: right;
-    }
+.plaque-label {
+    flex: 0 0 auto;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #000000c7;
+    margin: 0;
+    white-space: nowrap;
+}
 
-    .plaque-inputs input {
-        flex: 0 0 auto;
-        width: auto;
-        min-width: 50px;
-        max-width: 80px;
-        text-align: center;
-        font-weight: bold;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        letter-spacing: 2px;
-        padding: 0.4rem 0.6rem;
-    }
+.plaque-inputs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    direction: ltr;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+     margin-right: 1rem;
+}
 
-    .plaque-inputs input:nth-child(1),
-    .plaque-inputs input:nth-child(4) {
-        width: 60px;
-    }
+.plaque-inputs input {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 50px;
+    max-width: 80px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 2px;
+    padding: 0.4rem 0.6rem;
+}
 
-    .plaque-inputs input:nth-child(2) {
-        width: 50px;
-    }
 
-    .plaque-inputs input:nth-child(3) {
-        width: 80px;
+@media (min-width: 768px) {
+    .plaque-inputs {
+        transform: translateX(-60px);
+    }
+}  .plaque-label {
+        flex-shrink: 0;
+        margin-left: 0.5rem;
     }
 
     .plaque-inputs {
-        display: flex;
-        flex-wrap: nowrap;
-        gap: 0.5rem;
-        direction: ltr;
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
-    }
-
-    @media (max-width: 576px) {
-        .plaque-group {
-            flex-wrap: wrap;
-            justify-content: flex-start;
-        }
-
-        .plaque-input {
-            width: 60px !important;
-            margin-bottom: 0.5rem;
-        }
+        flex-shrink: 1;
     }
 
     .upload-wrapper {
@@ -373,6 +365,7 @@
                 </form>
                 <!-- /.portlet -->
 
+
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
                         const inputs = document.querySelectorAll(".plaque-input");
@@ -398,6 +391,7 @@
                     });
                 </script>
 
+
               {% if errors %}
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -414,5 +408,33 @@
                 });
         </script>
              {% endif %}     
+
+
+             <script>
+                function updateFileName(input) {
+                const label = input.nextElementSibling;
+                const textSpan = label.querySelector('.upload-text');
+                const svg = label.querySelector('svg');
+
+                 if (input.files && input.files.length > 0) {
+                     textSpan.textContent = 'آپلود شد ';
+                     textSpan.style.color = '#28a745';
+
+                svg.innerHTML = `
+             <path d="M20 6L9 17l-5-5" stroke="#28a745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                 `;
+                } else {
+                textSpan.textContent = input.name === 'image_plaque' ? 'تصویر پلاک' : 'تصویر کیلومتر';
+                textSpan.style.color = '#333';
+
+                svg.innerHTML = input.name === 'image_plaque'
+                  ? `<path d="M12 16v-8m0 0l-4 4m4-4l4 4M4 20h16a2 2 0 002-2V8a2 2 0 00-2-2h-4l-2-2h-4l-2 2H4a2 2 0 00-2 2v10a2 2 0 002 2z"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`
+                 : `<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" />
+                 <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />`;
+                    }
+                }
+        </script>
+
 
      {% endblock %}

@@ -4720,3 +4720,19 @@ body.dark .switchery>small {
     }
 }
 /*------------------------- Responsive End -------------------------*/
+.modal-page button[type='submit'],
+.modal-page input[type='submit'] {
+    margin-top: 35px;
+}
+.img-responsive {
+    display: block;
+    width: 200px;
+    height: auto;
+}
+h2,.h2 {
+    font: 30px IranSans;
+    font-weight: bold;
+}
+.m-b-20 {
+    margin-bottom: 5px !important;
+}

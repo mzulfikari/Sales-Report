@@ -123,7 +123,7 @@ class InformationCar(forms.ModelForm):
         if not car:
          return None
         if len(car) < 3:
-            raise ValidationError("نام خودرو حدداقل باید سه حرف باشد.")
+            raise ValidationError("نام خودرو حداقل باید سه حرف باشد.")
         if len(car) > 30:
             raise ValidationError("نام خودرو حداکثر باید سی حرف باشد..")
         return car

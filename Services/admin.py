@@ -12,7 +12,7 @@ class ServicesAdmin(admin.ModelAdmin):
         "customer_phone",
         "sold_by",
         "car",
-        "show_image",
+        "plaque",
         "amount_total",
         "get_created_jalali",)
     
