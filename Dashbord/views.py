@@ -10,7 +10,6 @@ class DashbordViews(LoginRequiredMixin,View):
     """
     Checking the user's typing to enter the dashboard related to user access
     """
-    
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             if request.user.type == UserType.superuser.value:
@@ -21,7 +20,4 @@ class DashbordViews(LoginRequiredMixin,View):
             redirect(reverse_lazy('account:cutomerverfiy'))
         return super().dispatch(request, *args, **kwargs)
         
-    
-def my_view(request):
-    now = timezone.now()  # گرفتن تاریخ و زمان فعلی
-    return render(request, "my_template.html", {"current_time": now})  
+

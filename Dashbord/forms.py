@@ -58,19 +58,22 @@ class PlateField(forms.MultiValueField):
         super().__init__(fields, widget=Plaque(), *args, **kwargs)
 
     def compress(self, data_list):
-      if data_list and len(data_list) == 4:
+     if data_list is None:
+        return ""
+     if isinstance(data_list, list) and len(data_list) == 4:
         return "-".join([data_list[3], data_list[2], data_list[1], data_list[0]])
-      return ""
+     return ""
+
 
 
 class InformationCar(forms.ModelForm):
     """Vehicle registration form"""
     sold_by = forms.IntegerField(required=False)
-    plaque = PlateField(label='  پلاک :')
+    plaque = PlateField(label='  پلاک :',required=False)
     
     class Meta:
         model = Services   
-        fields  = ('customer_phone','car','car_model','color','current_km',)
+        fields  = ('customer_phone','car','car_model','color','current_km','image_plaque','image_km')
         labels = {
             'customer_phone': 'شماره تلفن :',
             'car': 'نام خودرو :',
@@ -117,6 +120,8 @@ class InformationCar(forms.ModelForm):
     def clean_car(self):
         """ Error handling for vehicle names """
         car = self.cleaned_data.get('car')
+        if not car:
+         return None
         if len(car) < 3:
             raise ValidationError("نام خودرو حدداقل باید سه حرف باشد.")
         if len(car) > 30:

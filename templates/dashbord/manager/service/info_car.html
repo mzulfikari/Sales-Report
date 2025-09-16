@@ -136,6 +136,82 @@
         background-color: #fff;
         width: 200px;
     }
+
+    .upload-label-title label {
+        white-space: nowrap;
+        min-width: 100px;
+    }
+
+    .upload-label {
+        padding: 0.6rem 1rem;
+    }
+
+    @media (max-width: 600px) {
+        .upload-label {
+            padding: 0.4rem 0.8rem !important;
+            font-size: 0.85rem !important;
+        }
+    }
+
+    .upload-text {
+        font-size: 0.85rem;
+    }
+
+    .upload-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .upload-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex: 0 0 auto;
+    }
+
+    .upload-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: #f0f0f0;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: #333;
+        white-space: nowrap;
+    }
+
+    .upload-label svg {
+        width: 1.5rem;
+        height: auto;
+        flex-shrink: 0;
+    }
+
+    .upload-text {
+        font-size: 0.95rem;
+        font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+        .upload-label {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .upload-label svg {
+            width: 1.2rem;
+        }
+
+        .upload-text {
+            font-size: 0.85rem;
+        }
+    }
+    
 </style>
 
 <!-- BEGIN CSS -->
@@ -157,11 +233,13 @@
                         {% jalali_now "%Y-%m-%d" %}
 
                         <i class="icon-calendar"></i>
-                    </div><!-- /.breadcrumb-left -->
-                </div><!-- /.breadcrumb-box -->
-            </div><!-- /.col-md-12 -->
+                    </div>
+                    <!-- /.breadcrumb-left -->
+                </div>
+                <!-- /.breadcrumb-box -->
+            </div>
+            <!-- /.col-md-12 -->
             <!-- END BREADCRUMB -->
-
             <div class="col-lg-6">
                 <div class="portlet box shadow">
                     <div class="portlet-heading">
@@ -175,7 +253,7 @@
                     </div>
                     <!-- /.portlet-heading -->
                     <div class="portlet-body">
-                        <form role="form" method="post">
+                        <form role="form" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-body">
                                 <div class="form-group">
@@ -195,42 +273,19 @@
                                             </label>
                                         </div>
                                         {{form.car}}
-                                        {% if form.car.errors %}
-                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                            <i class="bi bi-exclamation-circle-fill"></i>
-                                            <ul class="list-none m-0 p-0">
-                                                {% for error in form.car.errors %}
-                                                <li>{{ error }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        {% endif %}
                                     </div>
-
                                     <!-- /.form-group -->
                                     <div class="plaque-group mb-4" style="direction: rtl;">
                                         <label for="{{ form.plaque.id_for_label }}" class="plaque-label">
                                             {{ form.plaque.label }}
                                         </label>
-                                        <div class="plaque-inputs" dir="ltr">
 
+                                        <div class="plaque-inputs" dir="ltr">
                                             {% for widget in form.plaque %}
                                             {{ widget }}
                                             {% endfor %}
                                         </div>
                                     </div>
-
-                                    {% if form.plaque.errors %}
-                                    <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                        <i class="bi bi-exclamation-circle-fill"></i>
-                                        <ul class="list-none m-0 p-0">
-                                            {% for error in form.plaque.errors %}
-                                            <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                    {% endif %}
-
                                     <!-- /.form-group -->
                                     <div class="form-inline-group">
                                         <div class="mb-4">
@@ -239,19 +294,7 @@
                                             </label>
                                         </div>
                                         {{form.car_model}}
-                                        {% if form.car_model.errors %}
-                                        <div class="flex items-center gap-2 text-red-600 text-sm mt-1">
-                                            <i class="bi bi-exclamation-circle-fill"></i>
-                                            <ul class="list-none m-0 p-0">
-                                                {% for error in form.car_model.errors %}
-                                                <li>{{ error }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        {% endif %}
                                     </div>
-                                </div>
-
                                 <!-- /.form-group -->
                                 <div class="form-inline-group">
                                     <div class="mb-4">
@@ -260,16 +303,7 @@
                                         </label>
                                     </div>
                                     {{form.current_km}}
-                                    {% if form.current_km.errors %}
-                                    <ul class="text-red-600 text-sm mt-1 list-none p-0">
-                                        {% for error in form.current_km.errors %}
-                                        <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                    {% endif %}
                                 </div>
-                            </div>
-
                             <!-- /.form-group -->
                             <div class="form-inline-row mb-3">
                                 <label for="{{ form.color.id_for_label }}">
@@ -287,73 +321,98 @@
                             </div>
 
                             <div class="upload-row" style="display: flex; gap: 1.5rem; align-items: center;">
-  <!-- لیبل اصلی -->
-  <label style="font-weight: bold; font-size: 15px; color: #333;">آپلود تصویر:</label>
+                                <!--label-->
+                                <label style="font-weight: bold; font-size: 15px; color: #333;"> تصاویر:</label>
 
-  <!-- آپلود تصویر پلاک -->
-  <div class="upload-wrapper" style="position: relative;">
-    <input type="file" id="file-upload" class="upload-input" onchange="updateFileName(this)">
-    <label for="file-upload" class="upload-label" style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 16v-8m0 0l-4 4m4-4l4 4M4 20h16a2 2 0 002-2V8a2 2 0 00-2-2h-4l-2-2h-4l-2 2H4a2 2 0 00-2 2v10a2 2 0 002 2z"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="upload-text">تصویر پلاک</span>
-    </label>
-  </div>
+                                <!-- upload plsque-->
+                                <div class="upload-wrapper" style="position: relative;">
+                                    <input type="file" name="image_plaque" id="file-upload" class="upload-input" accept="image/*"
+                                        onchange="updateFileName(this)">
+                                    <label for="file-upload" class="upload-label"
+                                        style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                            xmlns="http://www.w3.org/2000/svg" style="width: 1.5rem; height: auto;">
+                                            <path
+                                                d="M12 16v-8m0 0l-4 4m4-4l4 4M4 20h16a2 2 0 002-2V8a2 2 0 00-2-2h-4l-2-2h-4l-2 2H4a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" fill="none" />
+                                        </svg>
 
-  <!-- آپلود تصویر کیلومتر -->
-  <div class="upload-wrapper" style="position: relative;">
-    <input type="file" id="km-upload" class="upload-input" onchange="updateFileName(this)">
-    <label for="km-upload" class="upload-label" style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
-      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-        <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="upload-text">تصویر کیلومتر</span>
-    </label>
-  </div>
-</div>
+                                        <span class="upload-text">تصویر پلاک</span>
+                                    </label>
+                                </div>
 
+                                <!-- upload km-->
+                                <div class="upload-wrapper" style="position: relative;">
+                                    <input type="file" name="image_km" id="km-upload" class="upload-input" 
+                                        onchange="updateFileName(this)">
+                                    <label for="km-upload" class="upload-label"
+                                        style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                                                fill="none" />
+                                            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <span class="upload-text">تصویر کیلومتر</span>
+                                    </label>
+                                </div>
+                            </div>
 
-                
-                <!-- /.form-body -->
-                <div class="d-flex justify-content-center mt-4">
-                    <button type="submit" class="btn btn-success btn-round btn-lg px-5">
-                        <i class="icon-check"></i>
-                        ادامه
-                    </button>
+                            <!-- /.form-body -->
+                            <div class="d-flex justify-content-center mt-4">
+                                <button type="submit" class="btn btn-success btn-round btn-lg px-5">
+                                    <i class="icon-check"></i>
+                                    ادامه
+                                </button>
+                            </div>
+                            <!-- /.form-actions -->
+                    </div>
+                    <!-- /.portlet-body -->
                 </div>
-                <!-- /.form-actions -->
-            </div>
-            <!-- /.portlet-body -->
-        </div>
-        </form>
-        <!-- /.portlet -->
+                </form>
+                <!-- /.portlet -->
 
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const inputs = document.querySelectorAll(".plaque-input");
+                        inputs.forEach((input, index) => {
+                            input.addEventListener("input", function() {
+                                const maxLength = input.getAttribute("maxlength");
+                                if (input.value.length >= maxLength) {
+                                    const nextInput = inputs[index + 1];
+                                    if (nextInput) {
+                                        nextInput.focus();
+                                    }
+                                }
+                            });
+                            input.addEventListener("keydown", function(e) {
+                                if (e.key === "Backspace" && input.value.length === 0) {
+                                    const prevInput = inputs[index - 1];
+                                    if (prevInput) {
+                                        prevInput.focus();
+                                    }
+                                }
+                            });
+                        });
+                    });
+                </script>
+
+              {% if errors %}
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const inputs = document.querySelectorAll(".plaque-input");
-                inputs.forEach((input, index) => {
-                    input.addEventListener("input", function() {
-                        const maxLength = input.getAttribute("maxlength");
-                        if (input.value.length >= maxLength) {
-                            const nextInput = inputs[index + 1];
-                            if (nextInput) {
-                                nextInput.focus();
-                            }
-                        }
-                    });
-                    input.addEventListener("keydown", function(e) {
-                        if (e.key === "Backspace" && input.value.length === 0) {
-                            const prevInput = inputs[index - 1];
-                            if (prevInput) {
-                                prevInput.focus();
-                            }
-                        }
-                    });
+            document.addEventListener("DOMContentLoaded", function () {
+                {% for error in errors %}
+                 Toastify({
+                 text: "{{ error|escapejs }}",
+                 duration: 2000,
+                 gravity: "top",
+                 position: "right",
+                 backgroundColor: "#f44336",
+                 stopOnFocus: true,
+                }).showToast();
+                {% endfor %}
                 });
-            });
         </script>
+             {% endif %}     
 
-        {% endblock %}
+     {% endblock %}
