@@ -69,10 +69,10 @@ class Services(models.Model):
       max_length=10, null=True,blank=True,verbose_name=_('شماره پلاک')
         ) 
     image_plaque = models.ImageField(
-        null=True,blank=True,verbose_name=_('تصویر پلاک')
+        null=True,blank=True,verbose_name=_('تصویر پلاک'),upload_to='car/plaque'
     )
     image_km =models.ImageField(
-        null=True,blank=True,verbose_name=_('تصویر کیلومتر ')
+        null=True,blank=True,verbose_name=_('تصویر کیلومتر '),upload_to='car/km'
         )
     created_at = models.DateTimeField(
         auto_now_add=True,verbose_name=_('تاریخ خدمت')

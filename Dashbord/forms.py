@@ -40,7 +40,7 @@ class Plaque(forms.MultiWidget):
      if value:
         parts = value.split("-")
         if len(parts) == 4:
-            return [parts[3], parts[2], parts[1], parts[0]]
+            return parts
      return ["", "", "", ""]
 
     
@@ -61,9 +61,9 @@ class PlateField(forms.MultiValueField):
      if data_list is None:
         return ""
      if isinstance(data_list, list) and len(data_list) == 4:
-        return "-".join([data_list[3], data_list[2], data_list[1], data_list[0]])
+        return "-".join(data_list)
      return ""
-
+ 
 
 
 class InformationCar(forms.ModelForm):

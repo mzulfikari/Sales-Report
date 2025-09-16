@@ -30,15 +30,17 @@
         font-size: 0.95rem;
     }
 
-    .plaque-group {
+  .plaque-group {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
     direction: ltr;
-    flex-wrap: nowrap; 
-    overflow-x: auto;  
-   
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
 }
 
 .plaque-label {
@@ -48,6 +50,7 @@
     color: #000000c7;
     margin: 0;
     white-space: nowrap;
+    margin-left: 0.5rem;
 }
 
 .plaque-inputs {
@@ -57,7 +60,9 @@
     direction: ltr;
     overflow-x: auto;
     padding-bottom: 0.5rem;
-     margin-right: 1rem;
+    margin-right: 1rem;
+    -webkit-overflow-scrolling: touch;
+    min-width: fit-content;
 }
 
 .plaque-inputs input {
@@ -74,19 +79,12 @@
     padding: 0.4rem 0.6rem;
 }
 
-
-@media (min-width: 768px) {
+/* فقط در دسکتاپ واقعی جابه‌جایی افقی */
+@media (min-width: 1024px) {
     .plaque-inputs {
         transform: translateX(-60px);
     }
-}  .plaque-label {
-        flex-shrink: 0;
-        margin-left: 0.5rem;
-    }
-
-    .plaque-inputs {
-        flex-shrink: 1;
-    }
+}
 
     .upload-wrapper {
         display: flex;

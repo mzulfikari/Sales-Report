@@ -24,9 +24,9 @@ class ServicesAdmin(admin.ModelAdmin):
             "created_at",
             )
     
-    @admin.display(description='تاریخ ایجاد', ordering='created_at')
+    @admin.display(description='تاریخ ثبت', ordering='created_at')
     def get_created_jalali(self, obj):
-        return datetime2jalali(obj.created_at).strftime('%a, %d %b %Y')
+        return datetime2jalali(obj.created_at).strftime('%Y/%m/%d')
 
 
 @admin.register(Invoice)
